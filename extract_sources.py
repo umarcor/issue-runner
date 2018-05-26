@@ -1,5 +1,6 @@
-import urllib.request, json, re, io
 from sys import argv
+from urllib import request
+import json, re, io
 
 if len(argv)<2:
     print("No argument provided. Exiting...")
@@ -7,10 +8,10 @@ if len(argv)<2:
 
 try:
     x = re.search('(.+)#(.+)', argv[1])
-    data = json.loads(urllib.request.urlopen('https://api.github.com/repos/' + x.group(1) + '/issues/' + x.group(2)).read().decode('UTF-8'))["body"]
+    data = json.loads(request.urlopen('https://api.github.com/repos/' + x.group(1) + '/issues/' + x.group(2)).read().decode('UTF-8'))["body"]
 except:
     try:
-        data = urllib.request.urlopen(argv[1]).read()
+        data = request.urlopen(argv[1]).read()
     except:
         try:
             data = open(argv[1],'r').read()
@@ -31,4 +32,4 @@ for x in range(len(d)-1):
 # Find attached files
 for x in re.finditer('\[(.+)\]\((https://github.com/VUnit/vunit/files/.+)\)', data, flags=re.DOTALL):
     l = x.group(1)
-    open(l[0:len(l)-4], 'w').write(urllib.request.urlopen(x.group(2)).read().decode('UTF-8'))
+    open(l[0:len(l)-4], 'w').write(request.urlopen(x.group(2)).read().decode('UTF-8'))
