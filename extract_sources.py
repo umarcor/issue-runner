@@ -85,5 +85,5 @@ switcher = {
 }
 
 # Find attached files
-for x in re.finditer('\[([^\s].+)\]\((https://github.com/.+/files/.+)\)', data, flags=re.DOTALL):
+for x in re.finditer('\[([^\s\n ]+)\]\((https://github.com/[^\s\n]+/files/[^\s\n]+)\)', data, flags=re.DOTALL):
     switcher.get(x.group(1)[-3:], x_invalid)(x.group(1), x.group(2))
