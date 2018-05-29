@@ -11,9 +11,9 @@ mkdir -pv "$idir" && cd "$idir"
   curl -o extract_sources.py -L https://github.com/1138-4EB/issue-runner/raw/master/extract_sources.py
 
 # Detect python, fall back to docker python:slim-stretch
-export py="$(command -v python)"
+export py="$(command -v python3)"
 if [ "$py+x" = "+x" ]; then
-  export py="$(command -v python3)"
+  export py="$(command -v python)"
   if [ "$py+x" = "+x" ]; then
     export py="docker run --rm -tv /$(pwd):/src -w //src python:slim-stretch python"
   fi

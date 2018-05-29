@@ -30,7 +30,9 @@ for x in re.finditer('#>>', data, flags=re.DOTALL):
 
 for x in range(len(d)-1):
     buf = io.StringIO(re.sub('\r', r'', data[d[x]:d[x+1]-1]))
-    filename = buf.readline()[4:-1]
+    filename = buf.readline()[3:-1]
+    if filename[0]==' ':
+        filename=filename[1:]
     print("Get", filename)
     open(filename, 'w').write(buf.read())
 
