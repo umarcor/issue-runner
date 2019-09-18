@@ -1,0 +1,64 @@
+name: 'push'
+
+on:
+  push:
+    tags:
+      - '*'
+      - '!tip'
+    branches:
+      - '*'
+  pull_request:
+
+jobs:
+
+  action:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: yarn
+    - run: yarn build
+    - run: yarn test
+    - run: yarn prod
+    - name: Deploy to gha-tip
+      env:
+        GH_DEPKEY: ${{ secrets.GHA_DEPLOY_KEY }}
+      run: ./.github/update_gha-tip.sh
+
+  tool:
+    needs: [ action ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup go
+      uses: actions/setup-go@v1
+      with:
+        go-version: '1.13.x'
+    - name: golangci-lint
+      run: |
+        cd tool
+        curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b ./ latest
+        ./golangci-lint run -v
+#    - name: script test
+#      run: |
+#        go get -u github.com/kyoh86/richgo
+#        richgo test -v ./...
+    - name: goreleaser
+      run: |
+        cd tool
+        curl -fsSL https://git.io/goreleaser | sh -s -- --snapshot --skip-publish --rm-dist
+        cp dist/issue-runner_linux_amd64/issue-runner ../issue-runner
+    - name: binary test
+      run: |
+        ./tool/test.sh
+    - name: prepare artifacts
+      run: |
+        mkdir -p tool/dist/binaries
+        cd tool/dist/binaries
+        mv ../issue-runner_linux_amd64/issue-runner issue-runner_lin_amd64
+        mv ../issue-runner_windows_amd64/issue-runner.exe issue-runner_win_amd64.exe
+    - uses: 1138-4EB/tip@gha-tip
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        cwd:   ${{ github.workspace }}
+        files: |
+          tool/dist/binaries/*

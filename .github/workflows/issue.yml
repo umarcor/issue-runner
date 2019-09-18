@@ -1,0 +1,12 @@
+name: 'issue?'
+on:
+  issues:
+    types: [ opened, edited ]
+jobs:
+  mwe:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: 1138-4EB/issue-runner@gha-tip
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        allow-host: false
