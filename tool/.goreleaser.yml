@@ -1,0 +1,42 @@
+project_name: issue-runner
+
+builds:
+  - binary: issue-runner
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+#      - darwin
+      - linux
+    goarch:
+      - amd64
+#      - arm
+#      - arm64
+#    goarm:
+#      - 7
+    ldflags: -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.buildTime={{.Date}}`.
+
+snapshot:
+  # Default is `SNAPSHOT-{{.ShortCommit}}`.
+  name_template: '{{.ShortCommit}}'
+
+#dockers:
+#  - binaries:
+#      - issue-runner
+#    dockerfile: Dockerfile
+#    image_templates:
+#      - "1138-4EB/issue-runner:{{ .Tag }}"
+#      - "1138-4EB/issue-runner:v{{ .Major }}"
+#      - "1138-4EB/issue-runner:v{{ .Major }}.{{ .Minor }}"
+#      - "1138-4EB/issue-runner:slim"
+#    skip_push: true
+
+release:
+  disable: true
+
+archives:
+  - id: archive
+    format: tar.gz
+    format_overrides:
+    - goos: windows
+      format: zip

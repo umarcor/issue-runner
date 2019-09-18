@@ -1,0 +1,47 @@
+{
+  "name": "issue-runner",
+  "version": "0.0.0",
+  "private": false,
+  "description": "A toolkit to monitor issues, run Minimal Working Examples, and report results back.",
+  "scripts": {
+    "prod": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "compile": "webpack --mode none",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1138-4EB/issue-runner.git"
+  },
+  "keywords": [
+    "actions",
+    "mwe",
+    "runner",
+    "issue",
+    "triaging",
+    "triage",
+    "labelling",
+    "label"
+  ],
+  "author": "1138-4EB",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.1.0",
+    "@actions/exec": "^1.0.1",
+    "@actions/github": "^1.1.0",
+    "@actions/io": "^1.0.1",
+    "gfm-code-blocks": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.4",
+    "jest": "^24.8.0",
+    "jest-circus": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.1",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
