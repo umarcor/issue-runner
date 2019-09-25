@@ -104,6 +104,8 @@ print('Hello world!')
 ```
 ~~~
 
+> NOTE: to execute the MWE in multiple images, provide a space separated list. For example: `:image: alpine ghdl/ghdl:buster-mcode ubuntu:19.04`.
+
 Alternatively, if no `:image:` is defined, the file which is named `run` will be used as the entrypoint to execute the MWE on the host.
 
 ## CLI

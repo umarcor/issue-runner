@@ -3,35 +3,32 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"os/exec"
+	"strconv"
 )
 
 func (e *mwe) execute() error {
-	if e.entry != "" {
-		return docker(e.entry, e.dir)
-	}
-
-	if cfgNo {
-		return errHostExecDisabled
-	}
-
-	if !cfgYes {
-		fmt.Println(`WARNING! A MWE is about to be executed on the host. This is not recommended, since unreliable
-		code can damage your system. We suggest to use an OCI container instead.`)
-		if ok := askForConfirmation(); !ok {
-			return nil
+	switch len(e.entry) {
+	case 0:
+		return host(e.dir)
+	case 1:
+		return docker(e.entry[0], e.dir)
+	default:
+		for x, i := range e.entry {
+			rdir := e.dir + "-" + strconv.Itoa(x)
+			if err := copyDir(e.dir, rdir); err != nil {
+				return err
+			}
+			if err := docker(i, rdir); err != nil {
+				return err
+			}
+			if cfgClean {
+				fmt.Println("Removing...", rdir)
+				os.RemoveAll(rdir)
+			}
 		}
 	}
-
-	cmd := exec.Command("sh", "./run")
-	cmd.Dir = e.dir
-	o, err := cmd.CombinedOutput()
-	if err != nil {
-		return err
-	}
-	// TODO handle logs properly (tee)
-	// TODO handle exit code properly
-	fmt.Println(string(o))
 	return nil
 }
 
@@ -60,4 +57,29 @@ func askForConfirmation() bool {
 	} else {
 		return askForConfirmation()
 	}
+}
+
+func host(dir string) error {
+	if cfgNo {
+		return errHostExecDisabled
+	}
+
+	if !cfgYes {
+		fmt.Println(`WARNING! A MWE is about to be executed on the host. This is not recommended, since unreliable
+		code can damage your system. We suggest to use an OCI container instead.`)
+		if ok := askForConfirmation(); !ok {
+			return nil
+		}
+	}
+
+	cmd := exec.Command("sh", "./run")
+	cmd.Dir = dir
+	o, err := cmd.CombinedOutput()
+	if err != nil {
+		return err
+	}
+	// TODO handle logs properly (tee)
+	// TODO handle exit code properly
+	fmt.Println(string(o))
+	return nil
 }

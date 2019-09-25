@@ -49,10 +49,10 @@ func (e *mwe) parseBody(body string) error {
 
 	for _, s := range e.snippets {
 		if s.name[0:2] == "i:" {
-			if e.entry != "" {
+			if len(e.entry) != 0 {
 				log.Fatal("entrypoint already set to", e.entry)
 			}
-			e.entry = s.name[2:]
+			e.entry = strings.Split(s.name[2:], " ")
 			s.name = "run"
 		}
 	}
@@ -118,9 +118,5 @@ func isValidLink(name, ref *string) bool {
 	}
 
 	_, err := url.ParseRequestURI(*ref)
-	if err != nil {
-		return false
-	}
-
-	return true
+	return err == nil
 }
