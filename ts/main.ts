@@ -12,7 +12,7 @@ async function runner(issue) {
   writeFileSync('body.md', issue.body.replace(/\r\n/g, "\n"), { mode: 0o644 });
   core.endGroup()
 
-  let cli_args = ''
+  let cli_args = '-n'
   const allow_host = core.getInput('token', {required: true});
   if (allow_host) {
     cli_args = '-y '

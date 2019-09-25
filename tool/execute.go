@@ -11,13 +11,18 @@ func (e *mwe) execute() error {
 		return docker(e.entry, e.dir)
 	}
 
-	fmt.Println(`WARNING! A MWE is about to be executed on the host. This is not recommended, since unreliable
-code can damage your system. We suggest to use an OCI container instead.`)
+	if cfgNo {
+		return errHostExecDisabled
+	}
+
 	if !cfgYes {
+		fmt.Println(`WARNING! A MWE is about to be executed on the host. This is not recommended, since unreliable
+		code can damage your system. We suggest to use an OCI container instead.`)
 		if ok := askForConfirmation(); !ok {
 			return nil
 		}
 	}
+
 	cmd := exec.Command("sh", "./run")
 	cmd.Dir = e.dir
 	o, err := cmd.CombinedOutput()
