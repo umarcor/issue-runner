@@ -79,6 +79,7 @@ for t in \
 ; do
   gstart "[test] $t"
   ./issue-runner -y -c "$t"
+  echo "EXITCODE $?"
   gend
 done
 

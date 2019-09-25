@@ -113,7 +113,7 @@ func (e *mwe) parseFromURL(arg string) error {
 }
 
 func (e *mwe) parseFromFile(arg string) error {
-	fmt.Println("parseFromFile", arg, e)
+	fmt.Println("· parseFromFile", arg, e)
 	info, err := os.Stat(arg)
 	if !(os.IsNotExist(err) || info.IsDir()) {
 		dat, err := ioutil.ReadFile(arg)
