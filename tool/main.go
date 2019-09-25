@@ -17,8 +17,6 @@ var (
 
 // TODO Add function to return version string
 
-// TODO Support providing a list of `:image: ghdl/vunit:mcode ghdl/vunit:llvm`, instead of a single image
-
 var (
 	cfgTmp   string
 	cfgMerge bool
