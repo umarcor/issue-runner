@@ -2,9 +2,13 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"path"
+
+	"github.com/mholt/archiver"
 )
 
 func (e *mwe) generate(tmp string) error {
@@ -33,6 +37,25 @@ func (e *mwe) generate(tmp string) error {
 			return err
 		}
 	}
+
+	for _, l := range e.links {
+		resp, err := http.Get((*l)[1])
+		if err != nil {
+			return err
+		}
+		defer resp.Body.Close()
+		fname := (*l)[0]
+		_, err = archiver.ByExtension(fname)
+		if err != nil {
+			if err = bodyToDisk(resp.Body, path.Join(loc, fname)); err != nil {
+				return err
+			}
+			continue
+		}
+		if err = unarchive(resp.Body, loc, fname); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -44,4 +67,22 @@ func (es *mwes) generate(tmp string) error {
 		}
 	}
 	return nil
+}
+
+func bodyToDisk(src io.Reader, path string) error {
+	out, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+	_, err = io.Copy(out, src)
+	return err
+}
+
+func unarchive(src io.Reader, loc, name string) error {
+	fpath := path.Join(loc, name)
+	if err := bodyToDisk(src, fpath); err != nil {
+		return err
+	}
+	return archiver.Unarchive(fpath, loc)
 }

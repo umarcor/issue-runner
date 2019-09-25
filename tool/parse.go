@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/url"
+	"path/filepath"
 	"regexp"
 	"strings"
 
 	"gitlab.com/golang-commonmark/markdown"
 )
-
-var errEmptyBody = fmt.Errorf("no supported content found")
 
 func (e *mwe) parseBody(body string) error {
 	md := markdown.New(markdown.XHTMLOutput(true), markdown.Nofollow(true))
@@ -41,7 +41,9 @@ func (e *mwe) parseBody(body string) error {
 		}
 	}
 
-	if len(e.snippets) < 1 {
+	if links := parseLinks(body); len(links) != 0 {
+		e.links = append(e.links, links...)
+	} else if len(e.snippets) == 0 {
 		return errEmptyBody
 	}
 
@@ -74,4 +76,51 @@ func (s *snippet) parseName() bool {
 		}
 	}
 	return false
+}
+
+func parseLinks(body string) []*link {
+	fmt.Print("· parseLinks ")
+
+	re := regexp.MustCompile(`\[:mwe:([^ ]*)\]\((\S*)\)`)
+	if !re.MatchString(body) {
+		fmt.Println("no match")
+		return nil
+	}
+	refs := make([]*link, 0)
+
+	s := re.FindAllStringSubmatch(body, -1)
+	fmt.Println("match", len(s))
+	for _, r := range s {
+		if val := isValidLink(&(r[1]), &(r[2])); val {
+			fmt.Printf("Found ref [%s](%s)...\n", r[1], r[2])
+			refs = append(refs, &link{r[1], r[2]})
+		}
+	}
+
+	return refs
+}
+
+func isValidLink(name, ref *string) bool {
+	ext := filepath.Ext(*name)
+	if len(ext) == 0 {
+		ext = filepath.Ext(*ref)
+		if len(ext) == 0 {
+			fmt.Printf("WARNING! undefined extension for file <%s>, skipping", *name)
+			return false
+		}
+		*name = filepath.Base(*ref)
+	}
+	if ext[1:] == "txt" {
+		nname := (*name)[0 : len(*name)-len(ext)]
+		if len(filepath.Ext(nname)) != 0 {
+			*name = nname
+		}
+	}
+
+	_, err := url.ParseRequestURI(*ref)
+	if err != nil {
+		return false
+	}
+
+	return true
 }
