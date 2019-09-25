@@ -8,7 +8,7 @@ type mwes []*mwe
 
 type mwe struct {
 	args     []string
-	entry    string
+	entry    []string
 	dir      string
 	links    []*link
 	snippets []*snippet
@@ -24,7 +24,7 @@ type snippet struct {
 func newMWE(d string) *mwe {
 	return &mwe{
 		make([]string, 0),
-		"",
+		make([]string, 0),
 		d,
 		make([]*link, 0),
 		make([]*snippet, 0),

@@ -81,9 +81,7 @@ func (e *mwe) processArg(arg string) error {
 	// File path or URL
 	if ext := filepath.Ext(arg); ext != "" {
 		if ext != ".md" {
-			fmt.Println(ext)
-			fmt.Println("WIP! non-markdown files/tarballs/zipfiles not implemented yet")
-			return nil
+			return fmt.Errorf("WIP! non-markdown files/tarballs/zipfiles not supported as entrypoints yet")
 		}
 		_, err := url.ParseRequestURI(arg)
 		if err == nil {
