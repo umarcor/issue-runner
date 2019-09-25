@@ -1,4 +1,4 @@
-name: 'push'
+name: 'tool'
 
 on:
   push:
@@ -7,25 +7,12 @@ on:
       - '!tip'
     branches:
       - '*'
-  pull_request:
-
+    paths:
+      - '.github/workflows/tool.yml'
+      - 'tool/**'
 jobs:
 
-  action:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - run: yarn
-    - run: yarn build
-    - run: yarn test
-    - run: yarn prod
-    - name: Deploy to gha-tip
-      env:
-        GH_DEPKEY: ${{ secrets.GHA_DEPLOY_KEY }}
-      run: ./.github/update_gha-tip.sh
-
   tool:
-    needs: [ action ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
