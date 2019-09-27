@@ -9,13 +9,17 @@ const join = require('path').join;
 module.exports = {
   entry: './ts/main.ts',
   target: 'node',
+  resolve: {
+    mainFields: ['main', 'module'],
+//    extensions: ['.ts', '.js'],
+  },
   output: {
     path: join(__dirname, 'dist'),
-    filename: 'main.js',
+    filename: 'main.js'
 //    libraryTarget: "commonjs2",
   },
   devtool: 'source-map',
-  resolve: { extensions: ['.ts', '.js'] },
+//  optimization: { minimize: false },
   module: {
     rules: [{
       test: /\.ts$/,
