@@ -1,3 +1,14 @@
+<p align="center">
+  <a title="Go Report Card" href="https://goreportcard.com/report/github.com/1138-4EB/issue-runner"><img src="https://goreportcard.com/badge/github.com/1138-4EB/issue-runner?longCache=true&style=flat-square"></a><!--
+  -->
+  <a title="godoc.org" href="https://godoc.org/github.com/1138-4EB/issue-runner/tool"><img src="http://img.shields.io/badge/godoc-reference-5272B4.svg?longCache=true&style=flat-square"></a><!--
+  -->
+  <a title="Dependency Status" href="https://david-dm.org/1138-4EB/issue-runner"><img src="https://img.shields.io/david/1138-4EB/issue-runner.svg?longCache=true&style=flat-square&label=deps"></a><!--
+  -->
+  <a title="DevDependency Status" href="https://david-dm.org/1138-4EB/issue-runner?type=dev"><img src="https://img.shields.io/david/dev/1138-4EB/issue-runner.svg?longCache=true&style=flat-square&label=devdeps"></a><!--
+  -->
+</p>
+
 **issue-runner** is a toolkit to retrive, set up and run Minimal Working Examples (MWEs). MWEs are defined in a markdown file (such as the first comment in a GitHub issue), and external tarball(s)/zipfile(s)/file(s) can be included. The main use case for this toolkit is to be added to a GitHub Actions (GHA) workflow in order to monitor the issues in a repository and optionally report status/results by:
 
 - labelling issues as `reproducible` or `fixed?`,
