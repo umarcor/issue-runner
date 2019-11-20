@@ -8,6 +8,9 @@ on:
     branches:
       - '*'
 
+env:
+  CI: true
+
 jobs:
 
   action:
@@ -18,8 +21,8 @@ jobs:
     - run: yarn build
     - run: yarn test
     - run: yarn prod
-    - name: Deploy to gha-tip
-      env:
-        GH_DEPKEY: ${{ secrets.GHA_DEPLOY_KEY }}
-        GH_SHA: ${{ github.sha }}
+    - if: endsWith(github.ref, '/master')
+      name: Deploy to gha-tip
       run: ./.github/update_gha-tip.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

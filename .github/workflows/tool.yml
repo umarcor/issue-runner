@@ -10,6 +10,7 @@ on:
     paths:
       - '.github/workflows/tool.yml'
       - 'tool/**'
+
 jobs:
 
   tool:

@@ -9,10 +9,6 @@ gend () {
   :
 }
 
-if [ -n "$GITHUB_EVENT_PATH" ]; then
-  export CI=true
-fi
-
 [ -n "$CI" ] && {
   gstart () {
     printf "::[group]$@\n"
@@ -29,7 +25,7 @@ fi
 
 gstart "Check for uncommitted changes"
 git diff --exit-code --stat -- . ':!node_modules' \
-|| (echo "::[error] found changed files after build" && exit 1)
+|| (echo "::error:: found changed files after build" && exit 1)
 gend
 
 gstart "Update files in branch gha-tip"
@@ -48,16 +44,11 @@ if ! git diff --no-ext-diff --quiet --exit-code; then
   gstart "Commit changes"
   git config --local user.email "tip@gha"
   git config --local user.name "GHA"
-  git commit -a -m "update $GH_SHA"
+  git commit -a -m "update $GITHUB_SHA"
   gend
 
   gstart "Push to origin"
-  git remote set-url origin "$(git config --get remote.origin.url | sed 's#http.*com/#git@github.com:#g')"
-  eval `ssh-agent -t 60 -s`
-  echo "$GH_DEPKEY" | ssh-add -
-  mkdir -p ~/.ssh/
-  ssh-keyscan github.com >> ~/.ssh/known_hosts
+  git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY
   git push
-  ssh-agent -k
   gend
 fi
