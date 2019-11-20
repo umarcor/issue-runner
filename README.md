@@ -184,30 +184,16 @@ report the results back to GitHub
 `master` branch of this repository contains the TypeScript sources of the action. However, these need to be compiled. A job in workflow `push.yml` is used to update branch `gha-tip` after each push that passes the tests. This kind of *auto-updated* branches need to be manually created the first time:
 
 ```bash
-git checkout -b <release branch name>
-
-rm -Rf node_modules
-git rm -rf *.json *config.js *.lock .github .gitignore .v0 __tests__ src examples cli.sh
+cp action.yml dist/
+git checkout --orphan <BRANCH>
+git rm --cached -r .
 git add dist
+git clean -fdx
 git mv dist/* ./
-git add .
 
 git commit -am <release message>
 git push origin <release branch name>
 ```
-
-> NOTE: this procedure is based on https://github.com/actions/typescript-action#publish-to-a-distribution-branch
-
-## Set up CI
-
-A 'Deploy key' pair needs to be configured in order to automatically `git push` branch `gha-tip`:
-
-```sh
-ssh-keygen -t ed25519
-```
-- Repository 'Settings':
-  - Add public key to 'Deploy keys'.
-  - Add private key as 'GHA_DEPLOY_KEY' in 'Secrets'.
 
 ## Continuous integration
 
