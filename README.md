@@ -1,11 +1,11 @@
 <p align="center">
-  <a title="Go Report Card" href="https://goreportcard.com/report/github.com/1138-4EB/issue-runner"><img src="https://goreportcard.com/badge/github.com/1138-4EB/issue-runner?longCache=true&style=flat-square"></a><!--
+  <a title="Go Report Card" href="https://goreportcard.com/report/github.com/eine/issue-runner"><img src="https://goreportcard.com/badge/github.com/eine/issue-runner?longCache=true&style=flat-square"></a><!--
   -->
-  <a title="godoc.org" href="https://godoc.org/github.com/1138-4EB/issue-runner/tool"><img src="http://img.shields.io/badge/godoc-reference-5272B4.svg?longCache=true&style=flat-square"></a><!--
+  <a title="godoc.org" href="https://godoc.org/github.com/eine/issue-runner/tool"><img src="http://img.shields.io/badge/godoc-reference-5272B4.svg?longCache=true&style=flat-square"></a><!--
   -->
-  <a title="Dependency Status" href="https://david-dm.org/1138-4EB/issue-runner"><img src="https://img.shields.io/david/1138-4EB/issue-runner.svg?longCache=true&style=flat-square&label=deps"></a><!--
+  <a title="Dependency Status" href="https://david-dm.org/eine/issue-runner"><img src="https://img.shields.io/david/eine/issue-runner.svg?longCache=true&style=flat-square&label=deps"></a><!--
   -->
-  <a title="DevDependency Status" href="https://david-dm.org/1138-4EB/issue-runner?type=dev"><img src="https://img.shields.io/david/dev/1138-4EB/issue-runner.svg?longCache=true&style=flat-square&label=devdeps"></a><!--
+  <a title="DevDependency Status" href="https://david-dm.org/eine/issue-runner?type=dev"><img src="https://img.shields.io/david/dev/eine/issue-runner.svg?longCache=true&style=flat-square&label=devdeps"></a><!--
   -->
 </p>
 
@@ -32,7 +32,7 @@ jobs:
   mwe:
     runs-on: ubuntu-latest
     steps:
-    - uses: 1138-4EB/issue-runner@gha-v1
+    - uses: eine/issue-runner@gha-v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         allow-host: false
@@ -45,17 +45,17 @@ Note that `with` parameters are both optional:
 
 ## CLI tool
 
-The CLI tool is a static binary written in golang, which can optionally use `docker`. It can be downloaded from [github.com/1138-4EB/issue-runner/releases](https://github.com/1138-4EB/issue-runner/releases), or it can be built from sources:
+The CLI tool is a static binary written in golang, which can optionally use `docker`. It can be downloaded from [github.com/eine/issue-runner/releases](https://github.com/eine/issue-runner/releases), or it can be built from sources:
 
 ```
-git clone https://github.com/1138-4EB/issue-runner
+git clone https://github.com/eine/issue-runner
 cd tool
 go build -o issue-runner
 ```
 
 <!--
 ```sh
-curl -L https://raw.githubusercontent.com/1138-4EB/issue-runner/master/tool/get.sh | sh -
+curl -L https://raw.githubusercontent.com/eine/issue-runner/master/tool/get.sh | sh -
 ```
 
 > You can give it a try at [play-with-docker.com](https://labs.play-with-docker.com/). Just create a node and run the command above.
@@ -135,7 +135,7 @@ Providing a list of identifiers is also supported. For example:
 
 ```sh
 issue-runner \
-  'https://raw.githubusercontent.com/1138-4EB/issue-runner/master/examples/vunit_py.md' \
+  'https://raw.githubusercontent.com/eine/issue-runner/master/examples/vunit_py.md' \
   test/vunit_sh.md \
   'VUnit/vunit#337' \
   'ghdl/ghdl#579' \
@@ -201,9 +201,9 @@ After each commit is pushed to `master`:
 
 - The action is built, tested and published to branch `gha-tip`.
 - `golangci-lint` and `goreleaser` are executed in subdir `tool`, and `test.sh` is executed.
-- Action [1138-4EB/tip@gha-tip](https://github.com/1138-4EB/issue-runner/tip) is used to update tag `tip` and tool artifacts are published as a pre-release named `tip`.
+- Action [eine/tip@gha-tip](https://github.com/eine/issue-runner/tip) is used to update tag `tip` and tool artifacts are published as a pre-release named `tip`.
 
-> NOTE: version `1138-4EB/issue-runner@gha-tip` of this action will automatically retrieve the CLI tool from [github.com/1138-4EB/issue-runner/releases/tag/tip](https://github.com/1138-4EB/issue-runner/releases/tag/tip).
+> NOTE: version `eine/issue-runner@gha-tip` of this action will automatically retrieve the CLI tool from [github.com/eine/issue-runner/releases/tag/tip](https://github.com/eine/issue-runner/releases/tag/tip).
 
 # ToDo
 

@@ -72,7 +72,7 @@ set +e
 
 for t in \
   `ls ./__tests__/md/*.md` \
-  'https://raw.githubusercontent.com/1138-4EB/issue-runner/master/test/vunit_py.md' \
+  'https://raw.githubusercontent.com/eine/issue-runner/master/test/vunit_py.md' \
   'VUnit/vunit#337' \
   'ghdl/ghdl#579' \
   'ghdl/ghdl#584' \
@@ -85,7 +85,7 @@ done
 
 gstart "[test] mixed"
   ./issue-runner -y -c \
-  'https://raw.githubusercontent.com/1138-4EB/issue-runner/master/test/vunit_py.md' \
+  'https://raw.githubusercontent.com/eine/issue-runner/master/test/vunit_py.md' \
   vunit_sh.md \
   'VUnit/vunit#337'
 gend
