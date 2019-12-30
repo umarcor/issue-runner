@@ -1,0 +1,31 @@
+name: 'check'
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  mwe:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup go
+      uses: actions/setup-go@v1
+      with:
+        go-version: '1.13.x'
+    - uses: actions/checkout@v1
+    - run: |
+        cd tool
+        go build -o issue-runner
+        sudo mv issue-runner /usr/local/bin/issue-runner
+        sudo chmod +x /usr/local/bin/issue-runner
+    - run: |
+        yarn
+        yarn prod
+        mv dist/main.js ./
+        ls -la
+    - run: node ./main.js eine issue-runner
+    - uses: ./
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        allow-host: false

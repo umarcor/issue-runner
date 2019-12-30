@@ -13,6 +13,7 @@ import (
 	"strconv"
 
 	"github.com/google/go-github/v28/github"
+	v "github.com/spf13/viper"
 )
 
 func getIssueBody(user, repo, id string) string {
@@ -38,7 +39,7 @@ func processArgs(args []string) (*mwes, error) {
 
 	inc := func(a string) {
 		egs[k].args = append(egs[k].args, a)
-		if !cfgMerge {
+		if !v.GetBool("merge") {
 			k++
 		}
 	}

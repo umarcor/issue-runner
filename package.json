@@ -31,6 +31,8 @@
     "@actions/exec": "^1.0.2",
     "@actions/github": "^2.0.0",
     "@actions/io": "^1.0.1",
+    "@octokit/rest": "^16.35.2",
+    "ansi-colors": "^4.1.1",
     "gfm-code-blocks": "^1.0.0"
   },
   "devDependencies": {
