@@ -2,6 +2,8 @@ package main
 
 import (
 	"strconv"
+
+	v "github.com/spf13/viper"
 )
 
 type mwes []*mwe
@@ -32,13 +34,13 @@ func newMWE(d string) *mwe {
 }
 
 func newMWESlice(n int) (es mwes) {
-	if cfgMerge {
+	if v.GetBool("merge") || n == 1 {
 		es = make([]*mwe, 1)
-		es[0] = newMWE("tmp-run")
+		es[0] = newMWE(v.GetString("dir"))
 	} else {
 		es = make([]*mwe, n)
 		for x := range es {
-			es[x] = newMWE("tmp-run-" + strconv.Itoa(x))
+			es[x] = newMWE(v.GetString("dir") + "-" + strconv.Itoa(x))
 		}
 	}
 	return es

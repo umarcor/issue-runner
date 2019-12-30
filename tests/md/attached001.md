@@ -1,6 +1,7 @@
 The attached [:mwe:genericIssue.zip](https://github.com/ghdl/ghdl/files/2041677/genericIssue.zip) zipfile contains a MWE that can be executed with:
 
 ``` bash :image:ghdl/ghdl:buster-mcode
+#!/usr/bin/env sh
 ghdl -a --std=08 genericIssue/LinkedListPkg.vhd
 ghdl -a --std=08 genericIssue/Test_LinkedListPkg.vhd
 ghdl -e --std=08 Test_LinkedListPkg

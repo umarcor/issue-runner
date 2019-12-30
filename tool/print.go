@@ -17,9 +17,11 @@ func (e *mwe) print() {
 	}
 }
 
+/*
 func (es *mwes) print() {
 	for x, e := range *es {
 		fmt.Println("\nMWE", x)
 		e.print()
 	}
 }
+*/

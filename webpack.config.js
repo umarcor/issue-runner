@@ -1,31 +1,31 @@
 //@ts-check
 
-'use strict';
+"use strict";
 
-/**@type {import('webpack').Configuration}*/
+/**@type {import("webpack").Configuration}*/
 
-const join = require('path').join;
+const join = require("path").join;
 
 module.exports = {
-  entry: './ts/main.ts',
-  target: 'node',
+  entry: "./ts/main.ts",
+  target: "node",
   resolve: {
-    mainFields: ['main', 'module'],
-//    extensions: ['.ts', '.js'],
+    mainFields: ["main", "module"],
+    extensions: [".ts", ".js"],
   },
   output: {
-    path: join(__dirname, 'dist'),
-    filename: 'main.js'
+    path: join(__dirname, "dist"),
+    filename: "main.js"
 //    libraryTarget: "commonjs2",
   },
-  devtool: 'source-map',
+  devtool: "source-map",
 //  optimization: { minimize: false },
   module: {
     rules: [{
       test: /\.ts$/,
       exclude: /node_modules/,
       use: [{
-        loader: 'ts-loader',
+        loader: "ts-loader",
 //        options: {
 //          compilerOptions: {
 //            "module": "es6" // override `tsconfig.json` so that TypeScript emits native JavaScript modules.

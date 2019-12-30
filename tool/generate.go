@@ -9,22 +9,38 @@ import (
 	"path"
 
 	"github.com/mholt/archiver"
+	v "github.com/spf13/viper"
 )
 
-func (e *mwe) generate(tmp string) error {
-	// FIXME use 'tmp' if not empty, and update e.dir accordingly
-	loc := e.dir
+func (e *mwe) loc() string {
+	tmp := v.GetString("tmp")
+	if len(tmp) > 0 {
+		return path.Join(tmp, e.dir)
+	}
+	return e.dir
+}
+
+func (e *mwe) generate() error {
+	loc := e.loc()
+
 	info, err := os.Stat(loc)
 
-	if os.IsNotExist(err) {
-		err := os.MkdirAll(loc, 0755)
-		if err != nil {
-			return err
+	if err == nil {
+		if !info.IsDir() {
+			return fmt.Errorf("%s exists and it is not a directory, cannot proceed", loc)
 		}
+		fmt.Println(fmt.Sprintf("RemoveAll '%s'", loc))
+		os.RemoveAll(loc)
+	} else if os.IsNotExist(err) {
+		// Continue, and create it below
 	} else if err != nil {
 		return err
-	} else if !info.IsDir() {
-		return fmt.Errorf("%s exists and it is not a directory, cannot proceed", loc)
+	}
+
+	fmt.Println(fmt.Sprintf("MkdirAll '%s'", loc))
+	err = os.MkdirAll(loc, 0755)
+	if err != nil {
+		return err
 	}
 
 	for _, s := range e.snippets {
@@ -59,10 +75,10 @@ func (e *mwe) generate(tmp string) error {
 	return nil
 }
 
-func (es *mwes) generate(tmp string) error {
+func (es *mwes) generate() error {
 	for x, e := range *es {
 		fmt.Println("Generating...", x, e)
-		if err := e.generate(tmp); err != nil {
+		if err := e.generate(); err != nil {
 			return err
 		}
 	}
