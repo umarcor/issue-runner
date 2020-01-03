@@ -1,4 +1,5 @@
-__tests__/runner/*
+/dist
+/tool/dist
 
 # Rest pulled from https://github.com/github/gitignore/blob/master/Node.gitignore
 # Logs
