@@ -14,8 +14,15 @@ import (
 
 func (e *mwe) loc() string {
 	tmp := v.GetString("tmp")
+	isDocker := v.GetBool("indocker") && len(e.entry) != 0
 	if len(tmp) > 0 {
+		if isDocker {
+			return path.Join("/volume", tmp, e.dir)
+		}
 		return path.Join(tmp, e.dir)
+	}
+	if isDocker {
+		return path.Join("/volume", e.dir)
 	}
 	return e.dir
 }

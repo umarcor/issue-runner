@@ -1,11 +1,51 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
 	"path"
 )
+
+func mkDir(dir string) error {
+	if len(dir) != 0 {
+		info, err := os.Stat(dir)
+		if err == nil {
+			if !info.IsDir() {
+				return fmt.Errorf("'%s' exists and it is not a directory, cannot proceed", dir)
+			}
+		} else if os.IsNotExist(err) {
+			fmt.Println(fmt.Sprintf("MkdirAll '%s'", dir))
+			return os.MkdirAll(dir, 0755)
+		} else {
+			return err
+		}
+	}
+	return nil
+}
+
+func (e *mwe) print() {
+	fmt.Println("args:")
+	for _, a := range e.args {
+		fmt.Println("-", a)
+	}
+	fmt.Println("entrypoint:", e.entry)
+	fmt.Println("directory: ", e.dir)
+	fmt.Println("files:")
+	for _, s := range e.snippets {
+		fmt.Println("-", s.name)
+	}
+}
+
+/*
+func (es *mwes) print() {
+	for x, e := range *es {
+		fmt.Println("\nMWE", x)
+		e.print()
+	}
+}
+*/
 
 func copy(src, dst, name string, isdir bool) error {
 	srcfp := path.Join(src, name)
