@@ -5,7 +5,7 @@ import { Context } from '@actions/github/lib/context'
 import { WebhookPayload, PayloadRepository } from '@actions/github/lib/interfaces'
 import { which } from '@actions/io'
 
-import { default as Octokit } from '@octokit/rest'
+import { Octokit } from '@octokit/rest'
 
 import { triage } from './triage'
 import { execute} from './runner'
