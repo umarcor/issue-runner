@@ -2,30 +2,30 @@
 # yarn lockfile v1
 
 
-"@actions/core@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.2.0.tgz#aa5f52b26c362c821d41557e599371a42f6c0b3d"
-  integrity sha512-ZKdyhlSlyz38S6YFfPnyNgCDZuAF2T0Qv5eHflNWytPS8Qjvz39bZFMry9Bb/dpSnqWcNeav5yM2CTYpJeY+Dw==
+"@actions/core@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.2.1.tgz#867e92da94d80f743e6e0503c668af832465080a"
+  integrity sha512-xD+CQd9p4lU7ZfRqmUcbJpqR+Ss51rJRVeXMyOLrZQImN9/8Sy/BEUBnHO/UKD3z03R686PVTLfEPmkropGuLw==
 
-"@actions/exec@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@actions/exec/-/exec-1.0.2.tgz#80ae9c2ea0bf5d0046a9f73d2a1b15bddfff0311"
-  integrity sha512-Yo/wfcFuxbVjAaAfvx3aGLhMEuonOahas2jf8BwyA52IkXTAmLi7YVZTpGAQG/lTxuGoNLg9slTWQD4rr7rMDQ==
+"@actions/exec@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@actions/exec/-/exec-1.0.3.tgz#b967f8700d6ff011dcc91243b58bafc1bb9ab95f"
+  integrity sha512-TogJGnueOmM7ntCi0ASTUj4LapRRtDfj57Ja4IhPmg2fls28uVOPbAn8N+JifaOumN2UG3oEO/Ixek2A4NcYSA==
   dependencies:
     "@actions/io" "^1.0.1"
 
-"@actions/github@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@actions/github/-/github-2.0.0.tgz#5b066b1a8747bbf48d47a058d9c241a2e37d5ee7"
-  integrity sha512-sNpZ5dJyJyfJIO5lNYx8r/Gha4Tlm8R0MLO2cBkGdOnAAEn3t1M/MHVcoBhY/VPfjGVe5RNAUPz+6INrViiUPA==
+"@actions/github@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@actions/github/-/github-2.0.1.tgz#2870f56c28f042effc04e9ebf0df1f1af23715f7"
+  integrity sha512-C7dAsCkpPi1HxTzLldz+oY+9c5G+nnaK7xgk8KA83VVGlrGK7d603E3snUAFocWrqEu/uvdYD82ytggjcpYSQA==
   dependencies:
     "@octokit/graphql" "^4.3.1"
     "@octokit/rest" "^16.15.0"
 
-"@actions/io@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@actions/io/-/io-1.0.1.tgz#81a9418fe2bbdef2d2717a8e9f85188b9c565aca"
-  integrity sha512-rhq+tfZukbtaus7xyUtwKfuiCRXd1hWSfmJNEpFgBQJ4woqPEpsBw04awicjwz9tyG2/MVhAEMfVn664Cri5zA==
+"@actions/io@^1.0.1", "@actions/io@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@actions/io/-/io-1.0.2.tgz#2f614b6e69ce14d191180451eb38e6576a6e6b27"
+  integrity sha512-J8KuFqVPr3p6U8W93DOXlXW6zFvrQAJANdS+vw0YhusLIq+bszW8zmK2Fh1C2kDPX8FMvwIl1OUcFgvJoXLbAg==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
   version "7.5.5"
@@ -430,17 +430,17 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^24.0.25":
-  version "24.0.25"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.25.tgz#2aba377824ce040114aa906ad2cac2c85351360f"
-  integrity sha512-hnP1WpjN4KbGEK4dLayul6lgtys6FPz0UfxMeMQCv0M+sTnzN3ConfiO72jHgLxl119guHgI8gLqDOrRLsyp2g==
+"@types/jest@^24.9.0":
+  version "24.9.0"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.9.0.tgz#78c6991cd1734cf0d390be24875e310bb0a9fb74"
+  integrity sha512-dXvuABY9nM1xgsXlOtLQXJKdacxZJd7AtvLsKZ/0b57ruMXDKCOXAC/M75GbllQX6o1pcZ5hAG4JzYy7Z/wM2w==
   dependencies:
     jest-diff "^24.3.0"
 
-"@types/node@>= 8", "@types/node@^13.1.4":
-  version "13.1.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.4.tgz#4cfd90175a200ee9b02bd6b1cd19bc349741607e"
-  integrity sha512-Lue/mlp2egZJoHXZr4LndxDAd7i/7SQYhV0EjWfb/a4/OZ6tuVwMCVPiwkU5nsEipxEf7hmkSU7Em5VQ8P5NGA==
+"@types/node@>= 8", "@types/node@^13.1.7":
+  version "13.1.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.7.tgz#db51d28b8dfacfe4fb2d0da88f5eb0a2eca00675"
+  integrity sha512-HU0q9GXazqiKwviVxg9SI/+t/nAsGkvLDkIdxz+ObejG2nX6Si00TeLqHMoS+a/1tjH7a8YpKVQwtgHuMQsldg==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
