@@ -16,7 +16,7 @@ func mkDir(dir string) error {
 				return fmt.Errorf("'%s' exists and it is not a directory, cannot proceed", dir)
 			}
 		} else if os.IsNotExist(err) {
-			fmt.Println(fmt.Sprintf("MkdirAll '%s'", dir))
+			fmt.Printf("MkdirAll '%s'\n", dir)
 			return os.MkdirAll(dir, 0755)
 		} else {
 			return err
