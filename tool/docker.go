@@ -15,7 +15,7 @@ import (
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/jsonmessage"
-	"github.com/docker/docker/pkg/term"
+	"github.com/moby/term"
 
 	v "github.com/spf13/viper"
 )
