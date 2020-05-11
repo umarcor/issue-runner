@@ -29,19 +29,19 @@
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^2.1.1",
+    "@actions/github": "^2.2.0",
     "@actions/io": "^1.0.2",
-    "@octokit/rest": "^17.6.0",
+    "@octokit/rest": "^17.8.0",
     "ansi-colors": "^4.1.1",
     "gfm-code-blocks": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.4",
+    "@types/node": "^13.13.5",
     "jest": "^25.5.4",
-    "jest-circus": "^26.0.0",
-    "ts-jest": "^25.4.0",
-    "ts-loader": "^7.0.2",
+    "jest-circus": "^26.0.1",
+    "ts-jest": "^25.5.1",
+    "ts-loader": "^7.0.3",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
