@@ -38,11 +38,7 @@ export async function getIssues (
 export async function run (): Promise<any> {
   let octokit: any
   const repoToken: string = getInput('token', { required: false })
-  if (repoToken) {
-    octokit = new github.GitHub(repoToken)
-  } else {
-    octokit = new Octokit()
-  }
+  octokit = (repoToken) ? github.getOctokit(repoToken) : new Octokit()
 
   await which('issue-runner', true).catch((error) => {
     console.log(error.message)
