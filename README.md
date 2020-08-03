@@ -7,7 +7,7 @@
   -->
   <a title="'tool' workflow Status" href="https://github.com/eine/issue-runner/actions?query=workflow%3Atool"><img alt="'ghdl' workflow Status" src="https://img.shields.io/github/workflow/status/eine/issue-runner/tool?longCache=true&style=flat-square&label=tool"></a><!--
   -->
-  <a title="'action' workflow Status" href="https://github.com/eine/issue-runner/actions?query=workflow%3Adoc"><img alt="'action' workflow Status" src="https://img.shields.io/github/workflow/status/eine/issue-runner/action?longCache=true&style=flat-square&label=action"></a><!--
+  <a title="'action' workflow Status" href="https://github.com/eine/issue-runner/actions?query=workflow%3Aaction"><img alt="'action' workflow Status" src="https://img.shields.io/github/workflow/status/eine/issue-runner/action?longCache=true&style=flat-square&label=action"></a><!--
   -->
 </p>
 
