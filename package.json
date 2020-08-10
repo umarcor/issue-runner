@@ -36,10 +36,10 @@
     "gfm-code-blocks": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.8",
+    "@types/jest": "^26.0.9",
     "@types/node": "^14.0.27",
-    "jest": "^26.2.2",
-    "jest-circus": "^26.2.2",
+    "jest": "^26.3.0",
+    "jest-circus": "^26.3.0",
     "ts-jest": "^26.1.4",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
