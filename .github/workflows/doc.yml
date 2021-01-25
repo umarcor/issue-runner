@@ -35,8 +35,6 @@ jobs:
 
     - name: 'publish site to gh-pages'
       if: github.event_name != 'pull_request' && github.repository == 'eine/issue-runner'
-      env:
-        GH_DEPKEY: ${{ secrets.GHA_DEPLOY_KEY }}
       run: |
         cd doc/public/
         touch .nojekyll
