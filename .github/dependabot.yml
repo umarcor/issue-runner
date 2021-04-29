@@ -1,0 +1,27 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 99
+  ignore:
+  - dependency-name: webpack
+    versions:
+    - 5.35.1
+  - dependency-name: ts-loader
+    versions:
+    - 9.0.0
+    - 9.1.1
+  - dependency-name: "@octokit/rest"
+    versions:
+    - 18.5.3
+- package-ecosystem: gomod
+  directory: "/tool"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 99
+  ignore:
+  - dependency-name: github.com/spf13/cobra
+    versions:
+    - 1.1.3
