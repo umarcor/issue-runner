@@ -38,7 +38,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.19",
     "@types/node": "^15.6.1",
-    "jest": "^27.0.3",
+    "jest": "^27.0.4",
     "jest-circus": "^27.0.3",
     "ts-jest": "^27.0.2",
     "ts-loader": "^9.2.2",
