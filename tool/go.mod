@@ -9,7 +9,7 @@ require (
 	github.com/docker/docker v17.12.0-ce-rc1.0.20200508181053-298ba5b13150+incompatible
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/dsnet/compress v0.0.1 // indirect
-	github.com/golang/snappy v0.0.3 // indirect
+	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/go-github/v28 v28.1.1
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
@@ -18,7 +18,8 @@ require (
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/nwaples/rardecode v1.1.0 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
-	github.com/spf13/cobra v1.1.3
+	github.com/sirupsen/logrus v1.8.1 // indirect
+	github.com/spf13/cobra v1.2.1
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.8.1
 	github.com/ulikunitz/xz v0.5.10 // indirect
