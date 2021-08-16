@@ -36,7 +36,7 @@
     "gfm-code-blocks": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.1",
     "@types/node": "^16.4.13",
     "jest": "^27.0.6",
     "jest-circus": "^27.0.6",
