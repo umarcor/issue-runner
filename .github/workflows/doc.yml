@@ -13,7 +13,7 @@ jobs:
 
     - name: Get Hugo and Theme
       run: |
-        curl -fsSL https://github.com/gohugoio/hugo/releases/download/v0.62.1/hugo_extended_0.62.1_Linux-64bit.tar.gz | sudo tar xzf - -C /usr/local/bin hugo
+        curl -fsSL https://github.com/gohugoio/hugo/releases/download/v0.89.1/hugo_extended_0.89.1_Linux-64bit.tar.gz | sudo tar xzf - -C /usr/local/bin hugo
         sudo chmod +x /usr/local/bin/hugo
         mkdir -p doc/themes
         cd doc/themes
