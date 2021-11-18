@@ -13,12 +13,13 @@ NOTE: you can give it a try at [play-with-docker.com](https://labs.play-with-doc
 - The source files defined or referred in the first message of the issue are saved to separate files: `run.sh`, `tb_repro.vhd` and `tb_mwe.vhd`.
 - `run.sh` is executed.
 
-This is another example: [ghdl/ghdl#579](https://github.com/ghdl/ghdl/issues/579)
+Other examples: [ghdl/ghdl#579](https://github.com/ghdl/ghdl/issues/579), [ghdl/ghdl#584](https://github.com/ghdl/ghdl/issues/584)...
 
 ## Parser
 
 - The script parses the body of the message to search for `#>> filename.ext` lines. All the content between such a token and the next one is saved to the file. Therefore, a las dummy token, `#>> anything` must be added.
-- GitHub does not allow uploading files with any extension. So, scripts expect the user to append `.txt` to the attached filenames. This extra extension is trimmed.
+- GitHub allows uploading files with a limited set of extensions. So, `issue-runner` scripts expect the user to append `.txt` to the attached source filenames. This extra extension is trimmed.
+  - The exception to rule above are tarballs and zipfiles. No extra extension needs to be appended. The content of these is automatically extracted.
 
 ## Requirements
 

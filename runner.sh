@@ -3,7 +3,7 @@
 cd $(dirname $0)
 
 # Create temporal dir
-idir="$(echo "$1" | sed -e 's/\//--/g' | sed -e 's/#/--/g')"
+idir="run-$(echo "$1" | sed -e 's/\//--/g' | sed -e 's/#/--/g')"
 mkdir -pv "$idir" && cd "$idir"
 
 # Get extract_sources.py script
