@@ -26,10 +26,11 @@ jobs:
         cd tool
         curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b ./ latest
         ./golangci-lint run -v
-#    - name: script test
-#      run: |
-#        go get -u github.com/kyoh86/richgo
-#        richgo test -v ./...
+    - name: script test
+      run: |
+        go get -u github.com/kyoh86/richgo
+        cd tool
+        `go env GOPATH`/bin/richgo test -v ./...
     - name: goreleaser
       run: |
         cd tool

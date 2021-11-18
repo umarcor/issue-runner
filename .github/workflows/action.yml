@@ -20,9 +20,10 @@ jobs:
     - run: yarn
     - run: yarn build
     - run: yarn test
+    - run: rm -rf dist/*
     - run: yarn prod
-    - if: endsWith(github.ref, '/master')
-      name: Deploy to gha-tip
+    - name: Deploy to gha-tip
+      if: endsWith(github.ref, '/master')
       run: ./.github/update_gha-tip.sh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

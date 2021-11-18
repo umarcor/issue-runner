@@ -1,78 +1,98 @@
-import * as core from '@actions/core';
-import * as github from '@actions/github';
-import * as exec from '@actions/exec';
+import { getInput, setFailed } from '@actions/core'
+import * as exec from '@actions/exec'
+import * as github from '@actions/github'
+import { Context } from '@actions/github/lib/context'
+import { WebhookPayload, PayloadRepository } from '@actions/github/lib/interfaces'
+import { which } from '@actions/io'
 
-import { writeFileSync } from 'fs';
-//import { join } from 'path';
+import { default as Octokit } from '@octokit/rest'
 
-async function runner(issue) {
-  // TODO: can we pipe the content to the tool (through stdin), instead of writing the body to disk?
-  core.startGroup('write body.md');
-  // FIXME: is each line still preprended with '\n'? Is it coming from GitHub's payload?
-  writeFileSync('body.md', issue.body.replace(/\r\n/g, "\n"), { mode: 0o644 });
-  core.endGroup()
+import { triage } from './triage'
+import { execute} from './runner'
+import { summary} from './summary'
 
-  let cli_args = '-n'
-  const allow_host = core.getInput('token', {required: true});
-  if (allow_host) {
-    cli_args = '-y '
+// import { join } from 'path'
+
+export async function getIssues (
+  octokit: any,
+  args: string[],
+  filterLabels?: string[]
+): Promise<any> {
+  const allOpenIssues = await octokit.paginate('GET /repos/:owner/:repo/issues', {
+    owner: args[0],
+    repo: args[1],
+    state: 'open'
+  })
+
+  if (!filterLabels) {
+    return allOpenIssues
   }
 
-  writeFileSync('task.sh', `#!/usr/bin/env sh
-curl -fsSL -o issue-runner https://github.com/1138-4EB/issue-runner/releases/download/tip/issue-runner_lin_amd64
-chmod +x issue-runner
-./issue-runner ` + cli_args + `body.md
-`, { mode: 0o755 });
-
-  await exec.exec(`cat`, ['task.sh']);
-
-  // FIXME: it should be possible to execute 'task.sh' directly
-  await exec.exec(`sh`, ['-c', './task.sh']);
+  const issues: any[] = []
+  await Promise.all(allOpenIssues.map(async (el) => {
+    if (el.labels.find((o) => filterLabels.includes(o.name))) { issues.push(el) }
+  }))
+  return issues
 }
 
-export async function run() {
+export async function run (): Promise<any> {
+  let octokit: any
+  const repoToken: string = getInput('token', { required: false })
+  if (repoToken) {
+    octokit = new github.GitHub(repoToken)
+  } else {
+    octokit = new Octokit()
+  }
+
+  await which('issue-runner', true).catch((error) => {
+    console.log(error.message)
+    console.log("Installing 'issue-runner' from tip...")
+    const binURL = 'https://github.com/eine/issue-runner/releases/download/tip/issue-runner_lin_amd64'
+    exec.exec('curl', ['-fsSL', '-o', '/usr/local/bin/issue-runner', binURL]).catch((error) => {console.log(error.message)})
+    exec.exec('chmod', ['+x', '/usr/local/bin/issue-runner']).catch((error) => {console.log(error.message)})
+  })
+
   try {
-    const ctx = github.context;
+    const args = process.argv.slice(2)
+    if (args.length > 0) {
+      const sum = await execute(await getIssues(octokit, args))
+      summary(sum)
+    } else {
+      const ctx: Context = github.context
+      const payload: WebhookPayload = ctx.payload
+      if (!payload) {
+        setFailed('Empty payload!')
+        return
+      }
+      if (ctx.eventName !== 'issues' || !payload.issue) {
+        const repo: PayloadRepository | undefined = payload.repository
+        if (repo && repo.full_name) {
+          const sum = await execute(await getIssues(
+            octokit,
+            repo.full_name.split('/'),
+            ['fixed?', 'triage', 'reproducible']
+          ))
+          summary(sum)
+          return
+        }
+        setFailed("Empty payload 'issue' and 'repository'!")
+        return
+      }
 
-    //const issue: { owner: string; repo: string; number: number; } = ctx.issue;
-
-    if (ctx.eventName != 'issues' || !ctx.payload.issue ) {
-      console.log('not an issue, skipping');
-      return
+      const supportedEvents = ['opened', 'edited', 'labeled', 'unlabeled']
+      if (supportedEvents.indexOf(payload.action || 'undefined_action') < 0) {
+        console.log("issue neither 'opened', 'edited', 'labeled' nor 'unlabeled'; skipping")
+        return
+      }
+      triage(octokit, payload.issue)
     }
-
-    const act = ctx.payload.action;
-    if (act != 'opened' && act != 'edited') {
-      console.log("issue neither 'opened' nor 'edited', skipping");
-      return;
-    }
-
-    core.startGroup('Print issue labels');
-    console.log(ctx.payload.issue.labels);
-    core.endGroup()
-
-    runner(ctx.payload.issue);
-
-    //const repoToken: string = core.getInput('token', {required: true});
-
-/*
-    const octokit: github.GitHub = new github.GitHub(repoToken);
-    const { data: comment } = await octokit.issues.createComment({
-      owner: issue.owner,
-      repo: issue.repo,
-      issue_number: issue.number,
-      body: 'Welcome message!'
-    });
-*/
-  }
-
-  catch (error) {
-    core.setFailed(error.message);
-    throw error;
+  } catch (error) {
+    setFailed(error.message)
+    // throw error
   }
 }
 
-run();
+run()
 
 /*
 pull_request:      issues:       issue_comment:
@@ -97,7 +117,7 @@ ready_for_review
                    transferred
 */
 
-//https://github.com/actions/labeler
-//https://github.com/actions/first-interaction/blob/master/src/main.ts
+// https://github.com/actions/labeler
+// https://github.com/actions/first-interaction/blob/master/src/main.ts
 
-//https://octokit.github.io/rest.js/
+// https://octokit.github.io/rest.js/
