@@ -13,6 +13,8 @@ NOTE: you can give it a try at [play-with-docker.com](https://labs.play-with-doc
 - The source files defined or referred in the first message of the issue are saved to separate files: `run.sh`, `tb_repro.vhd` and `tb_mwe.vhd`.
 - `run.sh` is executed.
 
+This is another example: [ghdl/ghdl#579](https://github.com/ghdl/ghdl/issues/579)
+
 ## Parser
 
 - The script parses the body of the message to search for `#>> filename.ext` lines. All the content between such a token and the next one is saved to the file. Therefore, a las dummy token, `#>> anything` must be added.

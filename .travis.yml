@@ -1,0 +1,11 @@
+services: docker
+language: python
+python: 3.5
+install: skip
+script:
+  - ./runner.sh VUnit/vunit#337 || ls -la VUnit--vunit--337
+  - ./runner.sh ghdl/ghdl#579 || ls -la ghdl--ghdl--579
+addons:
+  apt:
+    packages:
+      - docker-ce
