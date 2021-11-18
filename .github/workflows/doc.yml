@@ -13,7 +13,7 @@ jobs:
         sudo chmod +x /usr/local/bin/hugo
         mkdir -p doc/themes
         cd doc/themes
-        git clone -b fix-npm-version https://github.com/buildthedocs/docuapi
+        git clone https://github.com/bep/docuapi
         cd docuapi
         npm install --only=dev
         mv node_modules ../..
