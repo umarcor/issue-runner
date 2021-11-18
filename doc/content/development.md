@@ -63,8 +63,8 @@ After each commit is pushed to `master`:
 
 - The action is built, tested and published to branch `gha-tip`.
 - `golangci-lint` and `goreleaser` are executed in subdir `tool`, and `test.sh` is executed.
-- Action [eine/tip@gha-tip](https://github.com/eine/issue-runner/tip) is used to update tag `tip` and tool artifacts are published as a pre-release named `tip`.
+- Action [umarcor/tip@gha-tip](https://github.com/umarcor/issue-runner/tip) is used to update tag `tip` and tool artifacts are published as a pre-release named `tip`.
 
 <aside class="notice">
-Version `eine/issue-runner@gha-tip` of this action will automatically retrieve the CLI tool from [github.com/eine/issue-runner/releases/tag/tip](https://github.com/eine/issue-runner/releases/tag/tip).
+Version `umarcor/issue-runner@gha-tip` of this action will automatically retrieve the CLI tool from [github.com/umarcor/issue-runner/releases/tag/tip](https://github.com/umarcor/issue-runner/releases/tag/tip).
 </aside>

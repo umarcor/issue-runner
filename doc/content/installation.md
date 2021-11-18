@@ -18,7 +18,7 @@ jobs:
   mwe:
     runs-on: ubuntu-latest
     steps:
-    - uses: eine/issue-runner@gha-v1
+    - uses: umarcor/issue-runner@gha-v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         allow-host: false
@@ -31,17 +31,17 @@ Note that `with` parameters are both optional:
 
 ## CLI tool
 
-The CLI tool is a static binary written in golang, which can optionally use `docker`. It can be downloaded from [github.com/eine/issue-runner/releases](https://github.com/eine/issue-runner/releases), or it can be built from sources.
+The CLI tool is a static binary written in golang, which can optionally use `docker`. It can be downloaded from [github.com/umarcor/issue-runner/releases](https://github.com/umarcor/issue-runner/releases), or it can be built from sources.
 
 ```sh
-git clone https://github.com/eine/issue-runner
+git clone https://github.com/umarcor/issue-runner
 cd tool
 go build -o issue-runner
 ```
 
 <!--
 ```sh
-curl -L https://raw.githubusercontent.com/eine/issue-runner/master/tool/get.sh | sh -
+curl -L https://raw.githubusercontent.com/umarcor/issue-runner/master/tool/get.sh | sh -
 ```
 
 > You can give it a try at [play-with-docker.com](https://labs.play-with-docker.com/). Just create a node and run the command above.

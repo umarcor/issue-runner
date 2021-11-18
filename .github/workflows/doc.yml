@@ -34,7 +34,7 @@ jobs:
         path: doc/public
 
     - name: 'publish site to gh-pages'
-      if: github.event_name != 'pull_request' && github.repository == 'eine/issue-runner'
+      if: github.event_name != 'pull_request'
       run: |
         cd doc/public/
         touch .nojekyll

@@ -1,4 +1,4 @@
-module github.com/eine/issue-runner/tool
+module github.com/umarcor/issue-runner/tool
 
 go 1.16
 

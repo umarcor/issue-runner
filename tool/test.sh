@@ -99,7 +99,7 @@ done
 
 #for t in \
 #  `ls ./tests/md/attach*.md` \
-#  'https://raw.githubusercontent.com/eine/issue-runner/master/test/vunit-py.md' \
+#  'https://raw.githubusercontent.com/umarcor/issue-runner/master/test/vunit-py.md' \
 #  'VUnit/vunit#337' \
 #  'ghdl/ghdl#579' \
 #  'ghdl/ghdl#584' \
@@ -117,7 +117,7 @@ done
 #
 #gstart "[test] mixed"
 #  ./issue-runner -y -c \
-#  'https://raw.githubusercontent.com/eine/issue-runner/master/test/vunit-py.md' \
+#  'https://raw.githubusercontent.com/umarcor/issue-runner/master/test/vunit-py.md' \
 #  vunit-sh.md \
 #  'VUnit/vunit#337'
 #gend

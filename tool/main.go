@@ -77,7 +77,7 @@ var rootCmd = &cobra.Command{
 	Short:   au.Sprintf(au.Cyan("issue-runner executes MWEs from markdown files")),
 	Long: `Execute Minimal Working Examples (MWEs) defined in markdown files,
 in the body of GitHub issues or as tarballs/zipfiles.
-Site: github.com/eine/issue-runner`,
+Site: github.com/umarcor/issue-runner`,
 	Args:         cobra.MinimumNArgs(1),
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {

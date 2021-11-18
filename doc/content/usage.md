@@ -85,7 +85,7 @@ Features to automatically label/comment the issues are not included in the CLI t
 ```sh
 issue-runner 'tests/md/vunit-sh.md' 'VUnit/vunit#337' 'ghdl/ghdl#579'
 # or
-issue-runner 'ghdl/ghdl#584' 'https://raw.githubusercontent.com/eine/issue-runner/master/tests/md/vunit-py.md'
+issue-runner 'ghdl/ghdl#584' 'https://raw.githubusercontent.com/umarcor/issue-runner/master/tests/md/vunit-py.md'
 ```
 
 At least one of the following references needs to be provided:
@@ -116,5 +116,5 @@ Instead of installing issue-runner on the host, the CLI tool can be used as a co
 docker run --rm \
   -v //var/run/docker.sock://var/run/docker.sock \
   -v issues://volume \
-  eine/issue-runner <ref>
+  umarcor/issue-runner <ref>
 ```

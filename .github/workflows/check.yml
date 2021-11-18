@@ -29,8 +29,8 @@ jobs:
         mv dist/main.js ./
         ls -la
 
-    - name: Run on eine/issue-runner
-      run: node ./main.js eine issue-runner
+    - name: Run on umarcor/issue-runner
+      run: node ./main.js umarcor issue-runner
 
     - name: Run action locally
       uses: ./

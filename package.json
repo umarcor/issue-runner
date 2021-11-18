@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eine/issue-runner.git"
+    "url": "git+https://github.com/umarcor/issue-runner.git"
   },
   "keywords": [
     "actions",
@@ -24,8 +24,8 @@
     "labelling",
     "label"
   ],
-  "author": "eine",
-  "license": "MIT",
+  "author": "umarcor",
+  "license": "Apache-2.0",
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/exec": "^1.0.4",

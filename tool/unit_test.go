@@ -90,7 +90,7 @@ func TestSuccess(t *testing.T) {
 		"../tests/md/docker003.md",
 		"../tests/md/docker004.md",
 		"../tests/md/attached001.md",
-		//"https://raw.githubusercontent.com/eine/issue-runner/master/tests/md/vunit-py.md",
+		//"https://raw.githubusercontent.com/umarcor/issue-runner/master/tests/md/vunit-py.md",
 		//"VUnit/vunit#337",
 		//"ghdl/ghdl#579",
 		//"ghdl/ghdl#584",

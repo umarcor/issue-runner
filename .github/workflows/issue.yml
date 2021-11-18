@@ -8,7 +8,7 @@ jobs:
   mwe:
     runs-on: ubuntu-latest
     steps:
-    - uses: eine/issue-runner@gha-tip
+    - uses: umarcor/issue-runner@gha-tip
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         allow-host: false

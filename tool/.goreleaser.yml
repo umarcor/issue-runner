@@ -25,10 +25,10 @@ snapshot:
 #      - issue-runner
 #    dockerfile: Dockerfile
 #    image_templates:
-#      - "eine/issue-runner:{{ .Tag }}"
-#      - "eine/issue-runner:v{{ .Major }}"
-#      - "eine/issue-runner:v{{ .Major }}.{{ .Minor }}"
-#      - "eine/issue-runner:slim"
+#      - "umarcor/issue-runner:{{ .Tag }}"
+#      - "umarcor/issue-runner:v{{ .Major }}"
+#      - "umarcor/issue-runner:v{{ .Major }}.{{ .Minor }}"
+#      - "umarcor/issue-runner:slim"
 #    skip_push: true
 
 release:
