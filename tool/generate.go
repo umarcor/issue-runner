@@ -36,7 +36,7 @@ func (e *mwe) generate() error {
 		if !info.IsDir() {
 			return fmt.Errorf("%s exists and it is not a directory, cannot proceed", loc)
 		}
-		fmt.Println(fmt.Sprintf("RemoveAll '%s'", loc))
+		fmt.Printf("RemoveAll '%s'\n", loc)
 		os.RemoveAll(loc)
 	} else if os.IsNotExist(err) {
 		// Continue, and create it below
@@ -44,7 +44,7 @@ func (e *mwe) generate() error {
 		return err
 	}
 
-	fmt.Println(fmt.Sprintf("MkdirAll '%s'", loc))
+	fmt.Printf("MkdirAll '%s'\n", loc)
 	err = os.MkdirAll(loc, 0755)
 	if err != nil {
 		return err
