@@ -32,6 +32,8 @@ jobs:
     - name: Run on umarcor/issue-runner
       run: node ./main.js umarcor issue-runner
 
+    - run: node ./main.js ghdl ghdl
+
     - name: Run action locally
       uses: ./
       with:
