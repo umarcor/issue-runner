@@ -13,7 +13,6 @@ import (
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/jsonmessage"
-	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/docker/docker/pkg/term"
 
 	v "github.com/spf13/viper"
@@ -65,7 +64,7 @@ func docker(img, dir string) error {
 			// it'd be interesting to set Tty: True;
 			// unfortunately MultiWriter below fails because bytes.Buffer is not a TTY
 			// however, os.Stdout and os.Stderr are TTYs
-			Tty: false,
+			Tty: true,
 		},
 		&container.HostConfig{
 			Binds: []string{bind},
@@ -98,7 +97,7 @@ func docker(img, dir string) error {
 		return err
 	}
 	buf := &bytes.Buffer{}
-	_, err = stdcopy.StdCopy(os.Stdout, io.MultiWriter(os.Stderr, buf), out)
+	_, err = io.Copy(io.MultiWriter(os.Stderr, buf), out)
 	if err != nil {
 		return err
 	}
