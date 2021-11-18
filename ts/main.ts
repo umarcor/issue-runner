@@ -82,9 +82,12 @@ export async function run (): Promise<any> {
       }
       triage(octokit, payload.issue)
     }
-  } catch (error) {
-    setFailed(error.message)
-    // throw error
+  } catch (err) {
+    console.error(err);
+    if (err instanceof Error) {
+      setFailed(err.message)
+      // throw error
+    }
   }
 }
 
