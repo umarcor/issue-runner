@@ -26,22 +26,22 @@ jobs:
         rm -rf dist/*
         yarn prod
 
-    - name: Deploy to gha-tip
-      if: endsWith(github.ref, '/master')
-      run: |
-        git diff --exit-code --stat -- . ':!node_modules' \
-        || (echo "::error:: found changed files after build" && exit 1)
-
-        cp action.yml dist/
-        cp README.md dist/README.md
-        cd dist
-        git init
-        cp ../.git/config ./.git/config
-        git checkout --orphan gha-tip
-        git add .
-
-        git config --local user.email "tip@gha"
-        git config --local user.name "GHA"
-        git commit -a -m "update $GITHUB_SHA"
-
-        git push origin +gha-tip
+#    - name: Deploy to gha-tip
+#      if: endsWith(github.ref, '/master')
+#      run: |
+#        git diff --exit-code --stat -- . ':!node_modules' \
+#        || (echo "::error:: found changed files after build" && exit 1)
+#
+#        cp action.yml dist/
+#        cp README.md dist/README.md
+#        cd dist
+#        git init
+#        cp ../.git/config ./.git/config
+#        git checkout --orphan gha-tip
+#        git add .
+#
+#        git config --local user.email "tip@gha"
+#        git config --local user.name "GHA"
+#        git commit -a -m "update $GITHUB_SHA"
+#
+#        git push origin +gha-tip
