@@ -16,14 +16,32 @@ jobs:
   action:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: yarn
-    - run: yarn build
-    - run: yarn test
-    - run: rm -rf dist/*
-    - run: yarn prod
+
+    - uses: actions/checkout@v2
+
+    - run: |
+        yarn
+        yarn build
+        yarn test
+        rm -rf dist/*
+        yarn prod
+
     - name: Deploy to gha-tip
       if: endsWith(github.ref, '/master')
-      run: ./.github/update_gha-tip.sh
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git diff --exit-code --stat -- . ':!node_modules' \
+        || (echo "::error:: found changed files after build" && exit 1)
+
+        cp action.yml dist/
+        cp README.md dist/README.md
+        cd dist
+        git init
+        cp ../.git/config ./.git/config
+        git checkout --orphan gha-tip
+        git add .
+
+        git config --local user.email "tip@gha"
+        git config --local user.name "GHA"
+        git commit -a -m "update $GITHUB_SHA"
+
+        git push origin +gha-tip
