@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"os/exec"
 	"path"
+	"runtime"
 	"strings"
 
 	"github.com/docker/docker/api/types"
@@ -17,6 +19,43 @@ import (
 
 	v "github.com/spf13/viper"
 )
+
+func checkInDocker() error {
+	v.Set("indocker", false)
+	if runtime.GOOS != "windows" {
+		cmd := exec.Command("cat", "/proc/self/cgroup")
+		o, err := cmd.CombinedOutput()
+		if err != nil {
+			return err
+		}
+		if strings.Contains(string(o), "docker") {
+			fmt.Println("it seems you are running issue-runner inside a Docker container")
+			if v.GetBool("no-docker") {
+				fmt.Println("but execution of sibling containers is disabled through '--no-docker'")
+			} else {
+				sock := "/var/run/docker.sock"
+				_, err := os.Stat(sock)
+				if os.IsNotExist(err) {
+					return fmt.Errorf("'%s' does not exist", sock)
+				} else if err != nil {
+					return err
+				}
+
+				fmt.Println("to run issues in sibling containers, ensure that 'issues:/volume' is bind")
+				vol := "/volume"
+				_, err = os.Stat(vol)
+				if os.IsNotExist(err) {
+					return fmt.Errorf("'%s' does not exist", vol)
+				} else if err != nil {
+					return err
+				}
+
+				v.Set("indocker", true)
+			}
+		}
+	}
+	return nil
+}
 
 func docker(img, dir string) error {
 	if v.GetBool("no-docker") {

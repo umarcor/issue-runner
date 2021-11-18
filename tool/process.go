@@ -62,6 +62,15 @@ func processArgs(args []string) (*mwes, error) {
 		if err != nil {
 			return nil, err
 		}
+		hasRun := false
+		for _, f := range egs[k].snippets {
+			if f.name == "run" {
+				hasRun = true
+			}
+		}
+		if !hasRun && len(egs[k].entry) == 0 {
+			return nil, errNoEntry
+		}
 		inc(i)
 	}
 	egs = egs[0:k]
@@ -82,7 +91,7 @@ func (e *mwe) processArg(arg string) error {
 	// File path or URL
 	if ext := filepath.Ext(arg); ext != "" {
 		if ext != ".md" {
-			return fmt.Errorf("WIP! non-markdown files/tarballs/zipfiles not supported as entrypoints yet")
+			return fmt.Errorf("WIP! non-markdown files/tarballs/zipfiles not supported as input yet")
 		}
 		_, err := url.ParseRequestURI(arg)
 		if err == nil {

@@ -29,8 +29,12 @@ jobs:
     - name: script test
       run: |
         go get -u github.com/kyoh86/richgo
+        go get -u github.com/wadey/gocovmerge
         cd tool
-        `go env GOPATH`/bin/richgo test -v ./...
+        `go env GOPATH`/bin/richgo test -count=1 -cover -v ./...
+        `go env GOPATH`/bin/gocovmerge coverage*.out > cover.out
+        go tool cover -func=cover.out
+        rm cover*.out
     - name: goreleaser
       run: |
         cd tool

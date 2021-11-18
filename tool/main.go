@@ -4,10 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"path"
-	"runtime"
-	"strings"
 
 	"github.com/docker/docker/client"
 	au "github.com/logrusorgru/aurora"
@@ -27,6 +24,7 @@ var (
 var (
 	cfgFile               string
 	errExecFailure        = fmt.Errorf("execution of the MWE failed")
+	errNoEntry            = fmt.Errorf("no entrypoint or run script found")
 	errExecFormat         = fmt.Errorf("exec format error; is there a shebang?")
 	errHostExecDisabled   = fmt.Errorf("execution of MWEs on the host is disabled")
 	errDockerExecDisabled = fmt.Errorf("execution of MWEs in OCI containers is disabled")
@@ -52,6 +50,8 @@ func main() {
 
 		switch err.Error() {
 		case errEmptyBody.Error():
+			os.Exit(exitEmpty)
+		case errNoEntry.Error():
 			os.Exit(exitEmpty)
 		// TODO These two following cases might be merged in a single case statement?
 		case errHostExecDisabled.Error():
@@ -81,6 +81,21 @@ Site: github.com/eine/issue-runner`,
 	Args:         cobra.MinimumNArgs(1),
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if err := checkInDocker(); err != nil {
+			return err
+		}
+
+		tmp := v.GetString("tmp")
+		if err := mkDir(tmp); err != nil {
+			return err
+		}
+
+		if v.GetBool("indocker") && !v.GetBool("no-docker") && len(tmp) != 0 {
+			if err := mkDir(path.Join("/volume", v.GetString("tmp"))); err != nil {
+				return err
+			}
+		}
+
 		_, err := run(args, !v.GetBool("no-exec"))
 		return err
 	},
@@ -165,59 +180,6 @@ func initConfig() {
 		}
 	} else {
 		log.Println("Using config file:", v.ConfigFileUsed())
-	}
-
-	tmp := v.GetString("tmp")
-	if len(tmp) != 0 {
-		info, err := os.Stat(tmp)
-		if err == nil {
-			if !info.IsDir() {
-				log.Fatal(fmt.Errorf("'%s' exists and it is not a directory, cannot proceed", tmp))
-			}
-		} else if os.IsNotExist(err) {
-			fmt.Println(fmt.Sprintf("MkdirAll '%s'", tmp))
-			err = os.MkdirAll(tmp, 0755)
-			if err != nil {
-				log.Fatal(err)
-			}
-		} else if err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	v.Set("indocker", false)
-	if runtime.GOOS != "windows" {
-		cmd := exec.Command("cat", "/proc/self/cgroup")
-		o, err := cmd.CombinedOutput()
-		if err != nil {
-			log.Fatal(err)
-		}
-		if strings.Contains(string(o), "docker") {
-			fmt.Println("it seems you are running issue-runner inside a Docker container")
-			if v.GetBool("no-docker") {
-				fmt.Println("but execution of sibling containers is disabled through '--no-docker'")
-			} else {
-				sock := "/var/run/docker.sock"
-				_, err := os.Stat(sock)
-				if os.IsNotExist(err) {
-					log.Fatal(fmt.Errorf("'%s' does not exist", sock))
-				} else if err != nil {
-					log.Fatal(err)
-				}
-
-				fmt.Println("to run issues in sibling containers, ensure that 'issues:/volume' is bind")
-				vol := "/volume"
-				_, err = os.Stat(vol)
-				if os.IsNotExist(err) {
-					log.Fatal(fmt.Errorf("'%s' does not exist", vol))
-				} else if err != nil {
-					log.Fatal(err)
-				}
-
-				v.Set("tmp", path.Join("/volume", v.GetString("tmp")))
-				v.Set("indocker", true)
-			}
-		}
 	}
 
 	//box = rice.MustFindBox("data")

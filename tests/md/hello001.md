@@ -1,6 +1,6 @@
-This is the body of an example issue with single code block, where the entrypoint to a docker container is a shell/bash script.
+This is the body of an example issue with single code block, a shell/bash script.
 
-```sh :image: alpine
+```sh :file: run
 #!/usr/bin/env sh
 echo "Hello world!"
 ```
