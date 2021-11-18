@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/1138-4EB/issue-runner.git"
+    "url": "git+https://github.com/eine/issue-runner.git"
   },
   "keywords": [
     "actions",
@@ -24,7 +24,7 @@
     "labelling",
     "label"
   ],
-  "author": "1138-4EB",
+  "author": "eine",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.0",

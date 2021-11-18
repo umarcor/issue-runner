@@ -1,6 +1,6 @@
 name: 'Issue runner'
 description: 'Test MWEs provided in issue bodies'
-author: '1138-4EB'
+author: 'eine'
 inputs:
   token:
     description: 'Token for the repo. Can be passed in using {{ secrets.GITHUB_TOKEN }}'

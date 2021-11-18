@@ -1,4 +1,4 @@
-module github.com/1138-4EB/issue-runner/tool
+module github.com/eine/issue-runner/tool
 
 go 1.13
 

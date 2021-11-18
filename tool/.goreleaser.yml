@@ -25,10 +25,10 @@ snapshot:
 #      - issue-runner
 #    dockerfile: Dockerfile
 #    image_templates:
-#      - "1138-4EB/issue-runner:{{ .Tag }}"
-#      - "1138-4EB/issue-runner:v{{ .Major }}"
-#      - "1138-4EB/issue-runner:v{{ .Major }}.{{ .Minor }}"
-#      - "1138-4EB/issue-runner:slim"
+#      - "eine/issue-runner:{{ .Tag }}"
+#      - "eine/issue-runner:v{{ .Major }}"
+#      - "eine/issue-runner:v{{ .Major }}.{{ .Minor }}"
+#      - "eine/issue-runner:slim"
 #    skip_push: true
 
 release:
