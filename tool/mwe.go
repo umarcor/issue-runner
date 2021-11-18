@@ -10,8 +10,11 @@ type mwe struct {
 	args     []string
 	entry    string
 	dir      string
+	links    []*link
 	snippets []*snippet
 }
+
+type link [2]string
 
 type snippet struct {
 	bytes []byte
@@ -23,6 +26,7 @@ func newMWE(d string) *mwe {
 		make([]string, 0),
 		"",
 		d,
+		make([]*link, 0),
 		make([]*snippet, 0),
 	}
 }

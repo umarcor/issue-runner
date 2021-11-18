@@ -17,16 +17,18 @@ var (
 
 // TODO Add function to return version string
 
-// TODO add option to fail if not interactive tty and not -y and local exec
-
 // TODO Support providing a list of `:image: ghdl/vunit:mcode ghdl/vunit:llvm`, instead of a single image
 
 var (
 	cfgTmp   string
 	cfgMerge bool
 	cfgYes   bool
+	cfgNo    bool
 	cfgClean bool
 )
+
+var errHostExecDisabled = fmt.Errorf("execution of MWEs on the host is disabled, use an OCI container instead")
+var errEmptyBody = fmt.Errorf("no supported content found")
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
@@ -74,7 +76,8 @@ func init() {
 func commonFlags(f *flag.FlagSet) {
 	f.StringVarP(&cfgTmp, "tmp", "t", "", "base directory for temporal dirs")
 	f.BoolVarP(&cfgMerge, "merge", "m", false, "merge arguments in a single MWE")
-	f.BoolVarP(&cfgYes, "yes", "y", false, "force response to interactive questions")
+	f.BoolVarP(&cfgYes, "yes", "y", false, "non-interactive: execute MWEs on the host")
+	f.BoolVarP(&cfgNo, "no", "n", false, "non-interactive: do not execute MWEs on the host")
 	f.BoolVarP(&cfgClean, "clean", "c", false, "remove sources after executing MWEs")
 }
 
