@@ -31,13 +31,13 @@
     "@actions/exec": "^1.0.4",
     "@actions/github": "^3.0.0",
     "@actions/io": "^1.0.2",
-    "@octokit/rest": "^17.11.0",
+    "@octokit/rest": "^18.0.0",
     "ansi-colors": "^4.1.1",
     "gfm-code-blocks": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.3",
-    "@types/node": "^14.0.11",
+    "@types/jest": "^26.0.0",
+    "@types/node": "^14.0.13",
     "jest": "^26.0.1",
     "jest-circus": "^26.0.1",
     "ts-jest": "^26.1.0",
