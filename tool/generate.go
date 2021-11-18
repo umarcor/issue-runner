@@ -55,7 +55,7 @@ func (e *mwe) generate() error {
 		if _, err := os.Stat(p); err == nil {
 			fmt.Println("WARNING! file", p, "exists, overwriting")
 		}
-		err := ioutil.WriteFile(p, s.bytes, 0755)
+		err := ioutil.WriteFile(p, s.bytes, 0755) // #nosec G306
 		if err != nil {
 			return err
 		}
