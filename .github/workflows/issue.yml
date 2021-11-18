@@ -1,8 +1,8 @@
 name: 'issue?'
 
 on:
-  issues:
-    types: [ opened, edited, labeled, unlabeled ]
+  #issues:
+  #  types: [ opened, edited, labeled, unlabeled ]
 
 jobs:
   mwe:

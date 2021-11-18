@@ -1,8 +1,8 @@
 name: 'doc'
 
 on:
-  push:
-  pull_request:
+  #push:
+  #pull_request:
 
 jobs:
   doc:

@@ -1,15 +1,15 @@
 name: 'tool'
 
 on:
-  push:
-    tags:
-      - '*'
-      - '!tip'
-    branches:
-      - '*'
-    paths:
-      - '.github/workflows/tool.yml'
-      - 'tool/**'
+  #push:
+  #  tags:
+  #    - '*'
+  #    - '!tip'
+  #  branches:
+  #    - '*'
+  #  paths:
+  #    - '.github/workflows/tool.yml'
+  #    - 'tool/**'
 
 jobs:
 

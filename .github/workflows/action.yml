@@ -1,12 +1,12 @@
 name: 'action'
 
 on:
-  push:
-    tags:
-      - '*'
-      - '!tip'
-    branches:
-      - '*'
+  #push:
+  #  tags:
+  #    - '*'
+  #    - '!tip'
+  #  branches:
+  #    - '*'
 
 env:
   CI: true
