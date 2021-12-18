@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta name="generator" content="Hugo 0.89.1" />
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>
+      issue-runner documentation
+    </title>
+    
+
+
+
+
+
+
+
+
+<link href='/issue-runner/styles/screen.min.4da12525a66a84ce812f93508873c5b8f6dea25319370ccb4a1dbff90b86a91b.css' rel="stylesheet" media="screen" integrity="sha256-TaElJaZqhM6BL5NQiHPFuPbeolMZNwzLSh2/&#43;QuGqRs=" />
+<link href='/issue-runner/styles/print.min.b6ef0215cf5b87a6b35afb71fb3d02b9f76a8be7c142071725edffc30df8e67f.css' rel="stylesheet" media="print" integrity="sha256-tu8CFc9bh6azWvtx&#43;z0Cufdqi&#43;fBQgcXJe3/ww345n8=" />
+
+
+    
+
+
+
+
+  
+
+<script src="/issue-runner/js/index.e4619e460f1bf032b63c9e8bf4c022ec118c03648d58c61e6a8402ae9e194017.js" integrity="sha256-5GGeRg8b8DK2PJ6L9MAi7BGMA2SNWMYeaoQCrp4ZQBc=" defer></script>
+
+    
+    <style>
+      [x-cloak] {
+      display: none !important;
+      }
+    </style>
+  </head>
+  <body class="index" x-data="{ navOpen: false }" x-cloak>
+    <a href="#" id="nav-button" @click="navOpen = !navOpen" :class="{'open': navOpen }">
+      <span>
+        NAV
+        <img src='/issue-runner/images/navbar.png'/>
+      </span>
+    </a>
+    <div class="toc-wrapper" :class="{'open': navOpen }">
+      
+      
+      
+        <div class="search" x-data="searchController">
+          <input x-model.debounce.100ms="query" type="search" class="search" id="input-search" placeholder='Search'>
+          <ul class="search-results visible" x-show="results.length > 0" x-transition.duration.700ms >
+            <template x-for="item in results">
+              <li>
+                <a x-text="item.title"></a>
+              </li>
+            </template>
+          </ul>
+        </div>
+      
+      
+  
+  
+    
+  
+  <ul id="toc" class="toc-list-h1" x-data="tocController" x-init="load([{&#34;id&#34;:&#34;introduction&#34;,&#34;level&#34;:1,&#34;sub&#34;:[],&#34;title&#34;:&#34;Introduction&#34;},{&#34;id&#34;:&#34;installation&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;set-up-a-github-actions-workflow&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Set up a GitHub Actions workflow&#34;},{&#34;id&#34;:&#34;cli-tool&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;CLI tool&#34;}],&#34;title&#34;:&#34;Installation&#34;},{&#34;id&#34;:&#34;usage&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;supported-markdown-syntax&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Supported markdown syntax&#34;},{&#34;id&#34;:&#34;entrypoint&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Entrypoint&#34;},{&#34;id&#34;:&#34;cli&#34;,&#34;level&#34;:2,&#34;sub&#34;:[{&#34;id&#34;:&#34;docker-container&#34;,&#34;level&#34;:3,&#34;title&#34;:&#34;Docker container&#34;}],&#34;title&#34;:&#34;CLI&#34;}],&#34;title&#34;:&#34;Usage&#34;},{&#34;id&#34;:&#34;development&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;id&#34;:&#34;build-and-test-inside-a-container&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Build and test inside a container&#34;},{&#34;id&#34;:&#34;internal-execution-steps&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Internal execution steps&#34;},{&#34;id&#34;:&#34;create-a-new-release-branch&#34;,&#34;level&#34;:2,&#34;title&#34;:&#34;Create a new release branch&#34;},{&#34;id&#34;:&#34;continuous-integration&#34;,&#34;level&#34;:2,&#34;sub&#34;:[],&#34;title&#34;:&#34;Continuous integration&#34;}],&#34;title&#34;:&#34;Development&#34;},{&#34;id&#34;:&#34;todo&#34;,&#34;level&#34;:1,&#34;sub&#34;:[{&#34;sub&#34;:[]}],&#34;title&#34;:&#34;ToDo&#34;}])" @scroll.window="onScroll()">
+    
+    <template x-for="row in rows">
+      <li>
+        <a x-text="row.title" @click="click(row)" :href="`#${row.id}`" class="toc-link" x-bind="rowClass(row)"></a>
+        
+          <ul x-show="row.open" x-bind="transitions()" class="da-toc-list-h2">
+            <template x-for="row in row.sub">
+              <li>
+                <a x-text="row.title" @click="click(row)" :href="`#${row.id}`" class="toc-link" x-bind="rowClass(row)"></a>
+                
+              </li>
+            </template>
+          </ul>
+        
+      </li>
+    </template>
+  </ul>
+
+      
+      
+        <ul class="toc-footer">
+          
+            <li>
+              <a href="https://github.com/umarcor/issue-runner"><img src="https://img.shields.io/badge/-umarcor/issue--runner-323131.svg?logo=github&amp;style=flat-square&amp;longCache=true" alt="github.com/umarcor/issue-runner"></a>
+            </li>
+          
+            <li>
+              Built with <a href="https://gohugo.io/">Hugo</a> theme <a href="https://github.com/bep/docuapi">DocuAPI</a> by <a href="https://github.com/bep">bep</a>
+            </li>
+          
+        </ul>
+      
+      
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+    
+
+
+
+
+
+<h1 id="introduction">Introduction</h1><p>Welcome to the documentation of <strong>issue-runner</strong>, a toolkit to retrive, set up and run Minimal Working Examples (MWEs).</p>
+<p>issue-runner supports MWEs defined in markdown files (such as the first comment in a GitHub issue), and external tarball(s)/zipfile(s)/file(s) can be included. It extracts sources to separate files, (optionally) invokes docker, executes the entrypoint, and cleans up.</p>
+<p>Furthermore, a GitHub Action (GHA) is provided, which allows to easily integrate the tool in (scheduled) YAML workflows.</p>
+
+  
+    
+
+
+
+  
+
+
+
+<h1 id="installation">Installation</h1>
+
+
+
+  
+
+
+
+<h2 id="set-up-a-github-actions-workflow">Set up a GitHub Actions workflow</h2><blockquote>
+<p>A minimal YAML workflow file:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">name</span>: <span style="color:#e6db74">&#39;issue?&#39;</span>
+<span style="color:#f92672">on</span>:
+  <span style="color:#f92672">issues</span>:
+    <span style="color:#f92672">types</span>: [ <span style="color:#ae81ff">opened, edited ]</span>
+<span style="color:#f92672">jobs</span>:
+  <span style="color:#f92672">mwe</span>:
+    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+    <span style="color:#f92672">steps</span>:
+    - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">umarcor/issue-runner@gha-v1</span>
+      <span style="color:#f92672">with</span>:
+        <span style="color:#f92672">token</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
+        <span style="color:#f92672">allow-host</span>: <span style="color:#66d9ef">false</span>
+</code></pre></div><p>Note that <code>with</code> parameters are both optional:</p>
+<ul>
+<li><code>token</code> is required to report feedback (labelling issues or adding comments automatically).</li>
+<li><code>allow-host</code> enables/disables running scripts on the host (without a container). For security reasons, this is discouraged and this parameter defaults to <code>false</code>.</li>
+</ul>
+
+
+
+
+  
+
+
+
+<h2 id="cli-tool">CLI tool</h2><p>The CLI tool is a static binary written in golang, which can optionally use <code>docker</code>. It can be downloaded from <a href="https://github.com/umarcor/issue-runner/releases">github.com/umarcor/issue-runner/releases</a>, or it can be built from sources.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/umarcor/issue-runner
+cd tool
+go build -o issue-runner
+</code></pre></div><!--
+```sh
+curl -L https://raw.githubusercontent.com/umarcor/issue-runner/master/tool/get.sh | sh -
+```
+
+> You can give it a try at [play-with-docker.com](https://labs.play-with-docker.com/). Just create a node and run the command above.
+-->
+
+  
+    
+
+
+
+  
+
+
+
+<h1 id="usage">Usage</h1>
+
+
+
+  
+
+
+
+<h2 id="supported-markdown-syntax">Supported markdown syntax</h2><blockquote>
+<p>Language definition string containing <code>:file:.*</code>:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">```sh :file: hello.sh
+#!/usr/bin/env sh
+echo &#34;Hello world!&#34;
+```
+</code></pre></div><blockquote>
+<p>Body containing <code>:file:.*</code> as a comment (that depends on the target language):</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md"><span style="color:#e6db74">```sh
+</span><span style="color:#e6db74"></span><span style="color:#75715e">#!/usr/bin/env sh
+</span><span style="color:#75715e"></span>echo <span style="color:#e6db74">&#34;Hello world!&#34;</span>
+<span style="color:#75715e">#:file: hello.sh</span>
+<span style="color:#e6db74">```</span>
+</code></pre></div><blockquote>
+<p>External files with the name to the reference matching <code>:mwe:.*</code>:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">[<span style="color:#f92672">:mwe:filename.ext.txt</span>](<span style="color:#a6e22e">URL</span>)
+[<span style="color:#f92672">:mwe:filename.tar.gz</span>](<span style="color:#a6e22e">URL</span>)
+</code></pre></div><p><strong>issue-runner</strong> scans the (markdown) body to extract:</p>
+<ul>
+<li>Decorated code blocks.</li>
+<li>Attached/linked files.</li>
+</ul>
+<aside class="notice">
+Since GitHub allows uploading files with a limited set of extensions, issue-runner expects the user to append <code>.txt</code> to attached source filenames. This extra extension is trimmed.
+<p>The exception are tarballs, zipfiles or txt files. No extra extension needs to be appended. The content of these is automatically extracted.</p>
+</aside>
+
+
+
+
+  
+
+
+
+<h2 id="entrypoint">Entrypoint</h2><blockquote>
+<p>Language definition string containing <code>:image:.*</code></p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">```sh :image: debian:buster-slim
+echo &#34;Hello world!&#34;
+```
+</code></pre></div><blockquote>
+<p>Body containing :image:.* as a comment (that depends on the target language):</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md"><span style="color:#e6db74">```py
+</span><span style="color:#e6db74"></span><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+print(<span style="color:#e6db74">&#39;Hello world!&#39;</span>)
+
+<span style="color:#75715e">#:image: python:slim-buster</span>
+<span style="color:#e6db74">```</span>
+</code></pre></div><p>One, and only one, of the code blocks should contain <code>:image:.*</code> instead of <code>:file:.*</code>. That file will be the entrypoint to an OCI container.</p>
+<aside class="notice">
+To execute the MWE in multiple images, provide a space separated list. For example: <code>:image: alpine ghdl/ghdl:buster-mcode ubuntu:19.04</code>.
+</aside>
+<p>Alternatively, if no <code>:image:</code> is defined, the file which is named <code>run</code> will be used as the entrypoint to execute the MWE on the host.</p>
+
+
+
+
+  
+
+
+
+<h2 id="cli">CLI</h2><aside class="notice">
+Features to automatically label/comment the issues are not included in the CLI tool. These features are implemented in the GitHub Action only.
+</aside>
+<blockquote>
+<p>Providing a list of identifiers is supported:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">issue-runner <span style="color:#e6db74">&#39;tests/md/vunit-sh.md&#39;</span> <span style="color:#e6db74">&#39;VUnit/vunit#337&#39;</span> <span style="color:#e6db74">&#39;ghdl/ghdl#579&#39;</span>
+<span style="color:#75715e"># or</span>
+issue-runner <span style="color:#e6db74">&#39;ghdl/ghdl#584&#39;</span> <span style="color:#e6db74">&#39;https://raw.githubusercontent.com/umarcor/issue-runner/master/tests/md/vunit-py.md&#39;</span>
+</code></pre></div><p>At least one of the following references needs to be provided:</p>
+<ul>
+<li>Path or URL to markdown file: <code>issue-runner path/to/markdown/file.md</code></li>
+<li>Full URL to a GitHub issue: <code>issue-runner 'https://github.com/user/repo/issues/number'</code></li>
+<li>Short reference of a GitHub issue (see <a href="https://help.github.com/articles/autolinked-references-and-urls/#issues-and-pull-requests">GitHub Help: Autolinked references and URLs</a>): <code>issue-runner 'user/repo#number'</code></li>
+</ul>
+<aside class="notice">
+Multiple references can be managed as a single MWE with flag <code>-m|--merge</code>.
+</aside>
+<blockquote>
+<p>MWEs defined in a single file/body can be read through <em>stdin</em>:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cat ./tests/md/hello001.md | ./issue-runner -
+<span style="color:#75715e"># or</span>
+./issue-runner -y - &lt; ./tests/md/hello003.md
+</code></pre></div>
+
+
+
+  
+
+
+
+<h3 id="docker-container">Docker container</h3><p>Instead of installing issue-runner on the host, the CLI tool can be used as a container. In this context, execution on the <em>host</em> refers to executing the MWEs in the same container. Running sibling containers is supported too; however, it requires a named volume (<code>issues:/volume</code>) and the socket of the daemon to be bind.</p>
+<blockquote>
+<p>Execution of MWEs on sibling containers:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker run --rm <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -v //var/run/docker.sock://var/run/docker.sock <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -v issues://volume <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  umarcor/issue-runner &lt;ref&gt;
+</code></pre></div>
+  
+    
+
+
+
+  
+
+
+
+<h1 id="development">Development</h1><p><strong>issue-runner</strong> is composed of:</p>
+<ul>
+<li>A JavaScript action with TypeScript compile time support, unit testing with Jest and using the GHA Toolkit.</li>
+<li>A CLI tool written in golang.</li>
+<li>A GHA workflow.</li>
+</ul>
+
+
+
+
+  
+
+
+
+<h2 id="build-and-test-inside-a-container">Build and test inside a container</h2><p>The CLI can be developed in an official <code>golang</code> (or <code>golang:alpine</code>) container. See <a href="">Usage</a> for information about required binds.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker run --rm -it <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -v /<span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>://src <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -w //src <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -v //var/run/docker.sock://var/run/docker.sock <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -v issues://volume <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  golang bash
+</code></pre></div>
+
+
+
+  
+
+
+
+<h2 id="internal-execution-steps">Internal execution steps</h2><p>Each time an issue is created or edited:</p>
+<!--
+issue metadata
+spawn container mounting files in /src
+report the results back to GitHub
+-->
+<ul>
+<li>&hellip;</li>
+<li>A temporal subdir is created.</li>
+<li>Source files defined or referred in the first message of the issue are saved to separate files.</li>
+<li>If a file with key <code>:image:</code> exists, it is saved as <code>run</code>.</li>
+<li><code>run</code> is executed either on the host or inside a container.</li>
+<li>&hellip;</li>
+</ul>
+
+
+
+
+  
+
+
+
+<h2 id="create-a-new-release-branch">Create a new release branch</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cp action.yml dist/
+git checkout --orphan &lt;BRANCH&gt;
+git rm --cached -r .
+git add dist
+git clean -fdx
+git mv dist/* ./
+
+git commit -am &lt;release message&gt;
+git push origin &lt;release branch name&gt;
+</code></pre></div><p><code>master</code> branch of this repository contains the TypeScript sources of the action. However, these need to be compiled. A job in workflow <code>push.yml</code> is used to update branch <code>gha-tip</code> after each push that passes the tests. This kind of <em>auto-updated</em> branches need to be manually created the first time.</p>
+
+
+
+
+  
+
+
+
+<h2 id="continuous-integration">Continuous integration</h2><p>After each commit is pushed to <code>master</code>:</p>
+<ul>
+<li>The action is built, tested and published to branch <code>gha-tip</code>.</li>
+<li><code>golangci-lint</code> and <code>goreleaser</code> are executed in subdir <code>tool</code>, and <code>test.sh</code> is executed.</li>
+<li>Action <a href="https://github.com/umarcor/issue-runner/tip">umarcor/tip@gha-tip</a> is used to update tag <code>tip</code> and tool artifacts are published as a pre-release named <code>tip</code>.</li>
+</ul>
+<aside class="notice">
+Version `umarcor/issue-runner@gha-tip` of this action will automatically retrieve the CLI tool from [github.com/umarcor/issue-runner/releases/tag/tip](https://github.com/umarcor/issue-runner/releases/tag/tip).
+</aside>
+
+  
+    
+
+
+
+  
+
+
+
+<h1 id="todo">ToDo</h1><ul>
+<li>
+<p><input disabled="" type="checkbox"> Complete section &lsquo;Internal execution steps&rsquo; of the README.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"> Properly handle exit codes / results.</p>
+</li>
+<li>
+<p><input disabled="" type="checkbox"> Rethink the format/name of temporal directories created for each MWE.</p>
+</li>
+<li>
+<p>Action:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Support labelling issues as <code>reproducible</code> or <code>fixed?</code>.</li>
+<li><input disabled="" type="checkbox"> Support editing an existing comment published by github-actions bot, instead of adding a new one each time.</li>
+<li><input disabled="" type="checkbox"> Support writing the logs and/or refs to jobs/artifacts in the body of the comment.</li>
+<li><input disabled="" type="checkbox"> Support a <code>with</code> option/parameter to optionally make test artifacts available through a CI job.</li>
+</ul>
+</li>
+<li>
+<p>CLI:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Add <em>golden</em> files.</li>
+<li><input disabled="" type="checkbox"> Write <code>get.sh</code> script and uncomment related info in section &lsquo;Installation &gt; CLI tool&rsquo; of the README.</li>
+</ul>
+</li>
+<li>
+<p>CI:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Implement publishing regular tagged (i.e. non-tip) releases.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://podman.io/">podman.io</a></p>
+<ul>
+<li><input disabled="" type="checkbox"> Check if podman is supported for local execution.</li>
+<li><input disabled="" type="checkbox"> Check if podman is supported in GHA environments (even though docker is installed by default).</li>
+</ul>
+</li>
+<li>
+<p>Security:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Ensure that github_token is not accessible for MWEs.</li>
+<li><input disabled="" type="checkbox"> Which are the risks of executing MWEs on the host?</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/arcanis/sherlock">arcanis/sherlock</a></p>
+<ul>
+<li>Close obsolete issues after each release</li>
+</ul>
+</li>
+</ul>
+<!--
+TODO: publish issue-runner as a scratch-based docker image
+Check requisites, e.g. "indocker":
+ - Check if the socket is available
+ - Check if there is some mechanism to share data between sibling containers
+-->
+
+  
+
+      </div>
+      <div class="dark-box">
+        
+      </div>
+    </div>
+    
+  </body>
+</html>
