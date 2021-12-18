@@ -57,7 +57,7 @@ jobs:
         mv ../issue-runner_linux_amd64/issue-runner issue-runner_lin_amd64
         mv ../issue-runner_windows_amd64/issue-runner.exe issue-runner_win_amd64.exe
 
-    - uses: eine/tip@master
+    - uses: pyTooling/Actions/releaser@r0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         files: tool/dist/binaries/*
