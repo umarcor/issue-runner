@@ -6,7 +6,7 @@ replace github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.6.0
 
 require (
 	github.com/containerd/containerd v1.5.2 // indirect
-	github.com/docker/docker v17.12.0-ce-rc1.0.20200508181053-298ba5b13150+incompatible
+	github.com/docker/docker v20.10.12+incompatible
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/dsnet/compress v0.0.1 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
