@@ -19,9 +19,9 @@ require (
 	github.com/nwaples/rardecode v1.1.0 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
-	github.com/spf13/cobra v1.2.1
+	github.com/spf13/cobra v1.3.0
 	github.com/spf13/pflag v1.0.5
-	github.com/spf13/viper v1.9.0
+	github.com/spf13/viper v1.10.0
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	gitlab.com/golang-commonmark/markdown v0.0.0-20191127184510-91b5b3c99c19
