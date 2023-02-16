@@ -5,7 +5,7 @@ go 1.16
 replace github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.6.0
 
 require (
-	github.com/containerd/containerd v1.5.2 // indirect
+	github.com/containerd/containerd v1.5.18 // indirect
 	github.com/docker/docker v17.12.0-ce-rc1.0.20200508181053-298ba5b13150+incompatible
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/dsnet/compress v0.0.1 // indirect
@@ -18,7 +18,6 @@ require (
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/nwaples/rardecode v1.1.0 // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
-	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.9.0
