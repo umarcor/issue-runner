@@ -12,7 +12,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/go-github/v28 v28.1.1
 	github.com/gorilla/mux v1.8.0 // indirect
-	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
+	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/mholt/archiver v3.1.1+incompatible
 	github.com/moby/term v0.0.0-20200507201656-73f35e472e8f
 	github.com/morikuni/aec v1.0.0 // indirect
